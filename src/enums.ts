@@ -12,6 +12,7 @@ export enum HttpRequestStatus {
 }
 
 export enum HttpErrorCode {
+  NoError = 0,
   UnknownError = 1,
   BadRequestError = 2,
   AuthenticationFailed = 3,

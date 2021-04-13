@@ -1,13 +1,16 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import snakecaseKeys from 'snakecase-keys';
 import camelcaseKeys from 'camelcase-keys';
 
-import { HttpMethod, HttpRequestStatus } from 'enums';
-import { FetchError } from 'errors';
-import { HttpResponse } from 'interfaces';
+import { HttpErrorCode, HttpMethod, HttpRequestStatus } from 'enums';
+import { HttpResponse, HttpResponseError } from 'interfaces';
 
 function useFetch() {
   const [status, setStatus] = useState(HttpRequestStatus.IDLE);
+  const [error, setError] = useState({
+    code: HttpErrorCode.NoError,
+    message: '',
+  });
 
   const request = useCallback(
     async (
@@ -39,16 +42,26 @@ function useFetch() {
 
       if (camelcasedResponse?.error?.code !== 0) {
         setStatus(HttpRequestStatus.FAIL);
-        throw new FetchError(camelcasedResponse);
+        setError(camelcasedResponse.error);
+      } else {
+        setStatus(HttpRequestStatus.SUCCESS);
+        setError({
+          code: HttpErrorCode.NoError,
+          message: '',
+        });
       }
 
-      setStatus(HttpRequestStatus.SUCCESS);
       return camelcasedResponse;
     },
     []
   );
 
-  return { request, status, isLoading: status === HttpRequestStatus.PENDING };
+  return {
+    request,
+    status,
+    isLoading: status === HttpRequestStatus.PENDING,
+    error,
+  };
 }
 
 export default useFetch;
