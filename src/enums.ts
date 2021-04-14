@@ -22,3 +22,14 @@ export enum HttpErrorCode {
   ExternalConnectionError = 7,
   AutomaticPairingError = 8,
 }
+
+export enum ScreenType {
+  Mobile,
+  Desktop,
+}
+
+export enum UserRole {
+  Visitor = 'visitor',
+  Admin = 'admin',
+  Superuser = 'superuser',
+}
