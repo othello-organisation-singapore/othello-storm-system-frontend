@@ -14,11 +14,12 @@ function useFetch() {
 
   const request = useCallback(
     async (
-      url: string,
+      path: string,
       method: HttpMethod,
       body?: object,
       options: object = {}
     ) => {
+      const url = `${process.env.REACT_APP_DOMAIN}${path}`;
       setStatus(HttpRequestStatus.PENDING);
 
       const bodyPayload = body

@@ -1,29 +1,27 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, Redirect, Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Dropdown, Menu } from 'semantic-ui-react';
-
 import HomePage from './HomePage';
+import LoginPage from './LoginPage';
+import Menu from './Menu';
 
-const StyledMenu = styled(Menu)`
-  && {
-    border-radius: 0;
-  }
+const PageWrapper = styled.div`
+  padding: 30px 40px;
+  height: calc(100vh - 54px);
 `;
+
 function OSS() {
   return (
     <BrowserRouter>
-      <StyledMenu inverted>
-        <Menu.Item name="Home" />
-        <Menu.Item name="About" />
-        <Menu.Item name="Tournament" />
-        <Menu.Item name="Profile" />
-      </StyledMenu>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Redirect to="/" />
-      </Switch>
+      <Menu />
+      <PageWrapper>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/login" component={LoginPage} />
+          <Redirect to="/" />
+        </Switch>
+      </PageWrapper>
     </BrowserRouter>
   );
 }

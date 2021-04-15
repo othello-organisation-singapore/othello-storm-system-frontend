@@ -3,15 +3,27 @@ import { parse } from 'cookie';
 
 import { UserRole } from 'enums';
 
-const UserContext = createContext({});
-export const useUserContext = () => useContext(UserContext);
-
 interface User {
   username?: string;
   displayName?: string;
   role: UserRole;
   jwt?: string;
 }
+
+interface UserContext {
+  user?: User;
+  isLoggedIn: boolean;
+  logout: Function;
+  login: Function;
+}
+
+const UserContext = createContext({
+  user: { role: UserRole.Visitor },
+  isLoggedIn: false,
+  logout: () => {},
+  login: () => {},
+});
+export const useUserContext = (): UserContext => useContext(UserContext);
 
 const getLoggedInUserData = (): User => {
   const { username, displayName, jwt, role = UserRole.Visitor } = parse(

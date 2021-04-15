@@ -12,7 +12,7 @@ export const joinParams = (params: object) =>
     .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
     .join('&');
 
-function useGet(url: string, params: object = {}) {
+function useGet(path: string, params: object = {}) {
   const { request, status, isLoading, error } = useFetch();
   const [refreshKey, setRefreshKey] = useState(0);
   const [data, setData] = useState({});
@@ -21,13 +21,13 @@ function useGet(url: string, params: object = {}) {
     const controller = new AbortController();
     const query = keys(params).length > 0 ? `?${joinParams(params)}` : '';
 
-    request(`${url}${query}`, HttpMethod.GET).then(response => {
+    request(`${path}${query}`, HttpMethod.GET).then(response => {
       if (!controller.signal.aborted && error.code === 0) {
         setData(response.data);
       }
       return () => controller.abort();
     });
-  }, [params, url, refreshKey]);
+  }, [params, path, refreshKey]);
 
   return {
     data,
