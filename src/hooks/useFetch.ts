@@ -52,7 +52,7 @@ function useFetch() {
         });
       }
 
-      return camelcasedResponse.data;
+      return camelcasedResponse.success;
     },
     []
   );

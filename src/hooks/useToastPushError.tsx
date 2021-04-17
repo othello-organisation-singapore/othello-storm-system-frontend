@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useCallback } from 'react';
+import React, { ReactNode, useCallback } from 'react';
 
 import { message } from 'antd';
 

@@ -20,17 +20,17 @@ const MenuAppGroup = styled(StyledMenuGroup)`
 
 const MenuProfileGroup = styled(StyledMenuGroup)``;
 
-const Gap = styled.div`
-  flex-grow: 1;
-`;
-
 const MenuRow = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
+const StyledButton = styled(Button)`
+  margin-left: 10px;
+`;
+
 function OSSMenu() {
-  const { isLoggedIn } = useUserContext();
+  const { isLoggedIn, logout } = useUserContext();
 
   return (
     <MenuRow>
@@ -51,9 +51,9 @@ function OSSMenu() {
             <Menu.Item>
               <Link to="/profile">Profile</Link>
             </Menu.Item>
-            <Button type="primary" danger>
+            <StyledButton type="primary" danger onClick={() => logout()}>
               Logout
-            </Button>
+            </StyledButton>
           </>
         ) : (
           <Button type="primary">

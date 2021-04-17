@@ -1,9 +1,13 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
 import { parse } from 'cookie';
+import { useHistory } from 'react-router-dom';
+
+import { message } from 'antd';
 
 import { UserRole, HttpMethod, HttpErrorCode } from 'enums';
 import useFetch from 'hooks/useFetch';
 import { HttpResponseError } from 'interfaces';
+import { setCookie, removeCookie } from './utils';
 
 interface User {
   username?: string;
@@ -41,6 +45,7 @@ const getLoggedInUserData = (): User => {
 export function UserContextProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState(getLoggedInUserData());
   const refreshUser = () => setUser(getLoggedInUserData());
+  const history = useHistory();
 
   const {
     request: loginRequest,
@@ -49,7 +54,11 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
   } = useFetch();
 
   const logout = () => {
-    document.cookie = '';
+    removeCookie('username');
+    removeCookie('displayName');
+    removeCookie('role');
+    removeCookie('jwt');
+    message.info('You have been logged out', 1.5);
     refreshUser();
   };
   const login = async (username: string, password: string) => {
@@ -57,9 +66,19 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
       username,
       password,
     });
+
+    if (response === undefined) {
+      return;
+    }
+
     const { jwt, username: loggedInUsername, displayName, role } = response;
-    document.cookie = `username=${loggedInUsername}; jwt=${jwt}; displayName=${displayName}; role=${role}`;
+    setCookie('username', loggedInUsername);
+    setCookie('displayName', displayName);
+    setCookie('role', role);
+    setCookie('jwt', jwt);
+    message.info('You have been logged in', 1.5);
     refreshUser();
+    history.push('/');
     return;
   };
   return (

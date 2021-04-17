@@ -1,20 +1,37 @@
 import React from 'react';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { ProgressiveContextProvider } from 'ProgressiveContext';
-import { UserContextProvider } from 'UserContext';
 import { ThemeContextProvider } from 'ThemeContext';
+import { UserContextProvider } from 'UserContext';
+import Menu from 'pages/Menu';
+import HomePage from 'pages/HomePage';
+import LoginPage from 'pages/LoginPage';
 
-import OSS from './pages';
+const PageWrapper = styled.div`
+  padding: 30px 40px;
+  height: calc(100vh - 46px);
+`;
 
 function App() {
   return (
-    <ProgressiveContextProvider>
-      <ThemeContextProvider>
-        <UserContextProvider>
-          <OSS />
-        </UserContextProvider>
-      </ThemeContextProvider>
-    </ProgressiveContextProvider>
+    <BrowserRouter>
+      <ProgressiveContextProvider>
+        <ThemeContextProvider>
+          <UserContextProvider>
+            <Menu />
+            <PageWrapper>
+              <Switch>
+                <Route exact path="/" component={HomePage} />
+                <Route path="/login" component={LoginPage} />
+                <Redirect to="/" />
+              </Switch>
+            </PageWrapper>
+          </UserContextProvider>
+        </ThemeContextProvider>
+      </ProgressiveContextProvider>
+    </BrowserRouter>
   );
 }
 
