@@ -2,50 +2,67 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Dropdown, Menu, Button } from 'semantic-ui-react';
+import { Dropdown } from 'semantic-ui-react';
+import { Menu, Button } from 'antd';
 
 import { useUserContext } from 'UserContext';
 
-const StyledMenu = styled(Menu)`
-  && {
-    justify-content: space-between;
-    border-radius: 0;
-  }
+const StyledMenuGroup = styled(Menu).attrs({
+  mode: 'horizontal',
+  theme: 'dark',
+  selectedKeys: [],
+})`
+  padding: 0 30px 0 10px;
 `;
 
-const MenuAppGroup = styled.div`
-  display: flex;
+const MenuAppGroup = styled(StyledMenuGroup)`
   flex-grow: 1;
 `;
 
-const MenuProfileGroup = styled.div`
+const MenuProfileGroup = styled(StyledMenuGroup)``;
+
+const Gap = styled.div`
+  flex-grow: 1;
+`;
+
+const MenuRow = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: space-between;
 `;
 
 function OSSMenu() {
   const { isLoggedIn } = useUserContext();
 
   return (
-    <StyledMenu inverted>
+    <MenuRow>
       <MenuAppGroup>
-        <Menu.Item name="Home" as={Link} to="/" />
-        <Menu.Item name="About" as={Link} to="/about" />
-        <Menu.Item name="Tournament" as={Link} to="/tournament" />
+        <Menu.Item>
+          <Link to="/">Home</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="/about">About</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="/tournament">Tournament</Link>
+        </Menu.Item>
       </MenuAppGroup>
       <MenuProfileGroup>
         {isLoggedIn ? (
           <>
-            <Menu.Item name="Profile" as={Link} to="/profile" />
-            <Button color="red">Logout</Button>
+            <Menu.Item>
+              <Link to="/profile">Profile</Link>
+            </Menu.Item>
+            <Button type="primary" danger>
+              Logout
+            </Button>
           </>
         ) : (
-          <Button primary as={Link} to="/login">
-            Login
+          <Button type="primary">
+            <Link to="login">Login</Link>
           </Button>
         )}
       </MenuProfileGroup>
-    </StyledMenu>
+    </MenuRow>
   );
 }
 

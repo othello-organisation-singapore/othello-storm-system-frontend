@@ -8,7 +8,7 @@ import Menu from './Menu';
 
 const PageWrapper = styled.div`
   padding: 30px 40px;
-  height: calc(100vh - 54px);
+  height: calc(100vh - 46px);
 `;
 
 function OSS() {
