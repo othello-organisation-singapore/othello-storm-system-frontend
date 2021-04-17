@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Dropdown } from 'semantic-ui-react';
 import { Menu, Button } from 'antd';
 
 import { useUserContext } from 'UserContext';
