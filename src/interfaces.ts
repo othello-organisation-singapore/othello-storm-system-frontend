@@ -6,6 +6,6 @@ export interface HttpResponseError {
 }
 
 export interface HttpResponse {
-  data: any;
+  success: any;
   error: HttpResponseError;
 }

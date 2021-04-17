@@ -3,7 +3,7 @@ import snakecaseKeys from 'snakecase-keys';
 import camelcaseKeys from 'camelcase-keys';
 
 import { HttpErrorCode, HttpMethod, HttpRequestStatus } from 'enums';
-import { HttpResponse, HttpResponseError } from 'interfaces';
+import { HttpResponse } from 'interfaces';
 
 function useFetch() {
   const [status, setStatus] = useState(HttpRequestStatus.IDLE);
@@ -14,11 +14,12 @@ function useFetch() {
 
   const request = useCallback(
     async (
-      url: string,
+      path: string,
       method: HttpMethod,
       body?: object,
       options: object = {}
     ) => {
+      const url = `${process.env.REACT_APP_DOMAIN}${path}`;
       setStatus(HttpRequestStatus.PENDING);
 
       const bodyPayload = body
@@ -51,7 +52,7 @@ function useFetch() {
         });
       }
 
-      return camelcasedResponse;
+      return camelcasedResponse.success;
     },
     []
   );
