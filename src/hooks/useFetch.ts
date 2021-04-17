@@ -3,7 +3,7 @@ import snakecaseKeys from 'snakecase-keys';
 import camelcaseKeys from 'camelcase-keys';
 
 import { HttpErrorCode, HttpMethod, HttpRequestStatus } from 'enums';
-import { HttpResponse, HttpResponseError } from 'interfaces';
+import { HttpResponse } from 'interfaces';
 
 function useFetch() {
   const [status, setStatus] = useState(HttpRequestStatus.IDLE);
@@ -52,7 +52,7 @@ function useFetch() {
         });
       }
 
-      return camelcasedResponse;
+      return camelcasedResponse.data;
     },
     []
   );
