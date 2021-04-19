@@ -9,18 +9,24 @@ const { Title, Text } = Typography;
 
 const StyledTitle = styled(Title)`
   && {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
+`;
+
+const LoginPageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const StyledInput = styled(Input)`
   margin: 10px 0;
-  max-width: 300px;
+  width: 300px;
 `;
 
 const StyledPasswordInput = styled(Input.Password)`
   margin: 10px 0 20px;
-  max-width: 300px;
+  width: 300px;
 `;
 
 function LoginPage() {
@@ -30,32 +36,34 @@ function LoginPage() {
   const { login } = useUserContext();
 
   return (
-    <>
+    <LoginPageWrapper>
       <StyledTitle level={2}>Login</StyledTitle>
       <div>
-        <Text>Username</Text>
+        <div>
+          <Text>Username</Text>
+        </div>
+        <div>
+          <StyledInput
+            placeholder="Your username"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+          />
+        </div>
+        <div>
+          <Text>Password</Text>
+        </div>
+        <div>
+          <StyledPasswordInput
+            placeholder="Your password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
+        </div>
+        <Button type="primary" onClick={() => login(username, password)}>
+          Login
+        </Button>
       </div>
-      <div>
-        <StyledInput
-          placeholder="Your username"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <Text>Password</Text>
-      </div>
-      <div>
-        <StyledPasswordInput
-          placeholder="Your password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
-      </div>
-      <Button type="primary" onClick={() => login(username, password)}>
-        Login
-      </Button>
-    </>
+    </LoginPageWrapper>
   );
 }
 
