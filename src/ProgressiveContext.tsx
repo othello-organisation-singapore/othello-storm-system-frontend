@@ -2,14 +2,14 @@ import {
   createContext,
   useContext,
   useState,
-  useLayoutEffect,
   ReactNode,
+  useEffect,
 } from 'react';
 import debounce from 'lodash/debounce';
 
 import { ScreenType } from 'enums';
 
-const ProgressiveContext = createContext({});
+const ProgressiveContext = createContext({ screenType: ScreenType.Desktop });
 export const useProgressiveContext = () => useContext(ProgressiveContext);
 
 export function ProgressiveContextProvider({
@@ -18,8 +18,8 @@ export function ProgressiveContextProvider({
   children: ReactNode;
 }) {
   const [width, setWidth] = useState(window.innerWidth);
-  useLayoutEffect(() => {
-    const handleSizeChange = debounce(() => setWidth(window.innerWidth), 500);
+  useEffect(() => {
+    const handleSizeChange = debounce(() => setWidth(window.innerWidth), 50);
     window.addEventListener('resize', handleSizeChange);
     return () => window.removeEventListener('resize', handleSizeChange);
   }, []);
