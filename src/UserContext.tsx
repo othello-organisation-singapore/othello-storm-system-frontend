@@ -4,10 +4,9 @@ import { useHistory } from 'react-router-dom';
 
 import { message } from 'antd';
 
-import { UserRole, HttpMethod, HttpErrorCode } from 'enums';
+import { UserRole, HttpMethod } from 'enums';
 import useFetch from 'hooks/useFetch';
 import useToastPushError from 'hooks/useToastPushError';
-import { HttpResponseError } from 'interfaces';
 import { setCookie, removeCookie } from './utils';
 
 interface User {
