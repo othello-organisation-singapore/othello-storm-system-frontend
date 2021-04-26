@@ -30,7 +30,8 @@ function useToastPushError(
       case HttpErrorCode.AuthenticationFailed:
         pushMessage(
           <>
-            Your account is not available in our database.
+            Either your account is not available, or you entered wrong
+            credentials.
             <br />
             Please try to re-log, or contact admin if this issue persists.
           </>

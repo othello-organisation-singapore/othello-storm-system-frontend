@@ -2,15 +2,11 @@ import { useCallback, useState } from 'react';
 import snakecaseKeys from 'snakecase-keys';
 import camelcaseKeys from 'camelcase-keys';
 
-import { HttpErrorCode, HttpMethod, HttpRequestStatus } from 'enums';
+import { HttpMethod } from 'enums';
 import { HttpResponse } from 'interfaces';
 
 function useFetch() {
-  const [status, setStatus] = useState(HttpRequestStatus.IDLE);
-  const [error, setError] = useState({
-    code: HttpErrorCode.NoError,
-    message: '',
-  });
+  const [isLoading, setIsLoading] = useState(false);
 
   const request = useCallback(
     async (
@@ -20,7 +16,7 @@ function useFetch() {
       options: object = {}
     ) => {
       const url = `${process.env.REACT_APP_DOMAIN}${path}`;
-      setStatus(HttpRequestStatus.PENDING);
+      setIsLoading(true);
 
       const bodyPayload = body
         ? JSON.stringify(snakecaseKeys(body, { deep: true }))
@@ -33,6 +29,7 @@ function useFetch() {
         headers: new Headers({ 'Content-Type': 'application/json' }),
         ...options,
       });
+      setIsLoading(false);
 
       const camelcasedResponse: HttpResponse = camelcaseKeys(
         await response.json(),
@@ -41,27 +38,17 @@ function useFetch() {
         }
       );
 
-      if (camelcasedResponse?.error?.code !== 0) {
-        setStatus(HttpRequestStatus.FAIL);
-        setError(camelcasedResponse.error);
-      } else {
-        setStatus(HttpRequestStatus.SUCCESS);
-        setError({
-          code: HttpErrorCode.NoError,
-          message: '',
-        });
-      }
-
-      return camelcasedResponse.success;
+      return {
+        response: camelcasedResponse.success,
+        error: camelcasedResponse?.error,
+      };
     },
     []
   );
 
   return {
     request,
-    status,
-    isLoading: status === HttpRequestStatus.PENDING,
-    error,
+    isLoading,
   };
 }
 

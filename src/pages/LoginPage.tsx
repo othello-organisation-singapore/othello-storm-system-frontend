@@ -33,7 +33,7 @@ function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const { login } = useUserContext();
+  const { login, isLoading } = useUserContext();
 
   return (
     <LoginPageWrapper>
@@ -59,7 +59,11 @@ function LoginPage() {
             onChange={e => setPassword(e.target.value)}
           />
         </div>
-        <Button type="primary" onClick={() => login(username, password)}>
+        <Button
+          type="primary"
+          onClick={() => login(username, password)}
+          disabled={isLoading}
+        >
           Login
         </Button>
       </div>

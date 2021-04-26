@@ -6,6 +6,7 @@ import { message } from 'antd';
 
 import { UserRole, HttpMethod, HttpErrorCode } from 'enums';
 import useFetch from 'hooks/useFetch';
+import useToastPushError from 'hooks/useToastPushError';
 import { HttpResponseError } from 'interfaces';
 import { setCookie, removeCookie } from './utils';
 
@@ -21,8 +22,7 @@ interface UserContext {
   isLoggedIn: boolean;
   logout: Function;
   login: Function;
-  isLoginLoading: boolean;
-  loginErrorDetails: HttpResponseError;
+  isLoading: boolean;
 }
 
 const UserContext = createContext({
@@ -30,8 +30,7 @@ const UserContext = createContext({
   isLoggedIn: false,
   logout: () => {},
   login: (_username: string, _password: string) => {},
-  isLoginLoading: false,
-  loginErrorDetails: { code: HttpErrorCode.NoError, message: '' },
+  isLoading: false,
 });
 export const useUserContext = (): UserContext => useContext(UserContext);
 
@@ -47,11 +46,8 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
   const refreshUser = () => setUser(getLoggedInUserData());
   const history = useHistory();
 
-  const {
-    request: loginRequest,
-    isLoading: isLoginLoading,
-    error: loginErrorDetails,
-  } = useFetch();
+  const { request: loginRequest, isLoading } = useFetch();
+  const { pushError } = useToastPushError();
 
   const logout = () => {
     removeCookie('username');
@@ -62,12 +58,14 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
     refreshUser();
   };
   const login = async (username: string, password: string) => {
-    const response = await loginRequest('/api/login', HttpMethod.POST, {
-      username,
-      password,
-    });
+    const { response, error } = await loginRequest(
+      '/api/login/',
+      HttpMethod.POST,
+      { username, password }
+    );
 
-    if (response === undefined) {
+    if (response === '') {
+      pushError(error.code);
       return;
     }
 
@@ -88,8 +86,7 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
         isLoggedIn: user.role !== UserRole.Visitor,
         logout,
         login,
-        isLoginLoading,
-        loginErrorDetails,
+        isLoading,
       }}
     >
       {children}
