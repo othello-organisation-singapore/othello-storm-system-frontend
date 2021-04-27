@@ -20,6 +20,10 @@ const StyledMenuGroup = styled(Menu).attrs({
   selectedKeys: [],
 })`
   padding: 0 30px 0 10px;
+
+  @media only screen and (max-width: 350px) {
+    font-size: 12px;
+  }
 `;
 
 const MenuAppGroup = styled(StyledMenuGroup)`
@@ -58,12 +62,48 @@ function DesktopMenu() {
         <Menu.Item>
           <Link to="/">Home</Link>
         </Menu.Item>
-        <Menu.Item>
-          <Link to="/about">About</Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link to="/tournament">Tournament</Link>
-        </Menu.Item>
+        <Menu.SubMenu title="About">
+          <Menu.Item>
+            <Link to="/about/othello">Othello</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/about/wof">World Othello Federation</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/about/oos">Othello Organisation Singapore</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/about/othellostorm">Othello Storm System</Link>
+          </Menu.Item>
+        </Menu.SubMenu>
+        {isLoggedIn ? (
+          <Menu.SubMenu title="Tournament">
+            <Menu.Item>
+              <Link to="/tournaments/managed">My Tournaments</Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link to="/tournaments/created">Created by Me</Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link to="/tournaments">All Tournaments</Link>
+            </Menu.Item>
+          </Menu.SubMenu>
+        ) : (
+          <Menu.Item>
+            <Link to="/tournaments">Tournament</Link>
+          </Menu.Item>
+        )}
+        <Menu.SubMenu title="Resources">
+          <Menu.Item>
+            <Link to="/resources/platform">Othello Platforms</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/resources/book">Othello Books</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/resources/video">Othello Teaching Videos</Link>
+          </Menu.Item>
+        </Menu.SubMenu>
       </MenuAppGroup>
       <MenuProfileGroup>
         {isLoggedIn ? (
@@ -101,12 +141,48 @@ function MobileMenu() {
           <Menu.Item>
             <Link to="/">Home</Link>
           </Menu.Item>
-          <Menu.Item>
-            <Link to="/about">About</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/tournament">Tournament</Link>
-          </Menu.Item>
+          <Menu.SubMenu title="About">
+            <Menu.Item>
+              <Link to="/about/othello">Othello</Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link to="/about/wof">WOF</Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link to="/about/oos">OOS</Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link to="/about/othellostorm">Othello Storm</Link>
+            </Menu.Item>
+          </Menu.SubMenu>
+          {isLoggedIn ? (
+            <Menu.SubMenu title="Tournament">
+              <Menu.Item>
+                <Link to="/tournaments/managed">My Tournaments</Link>
+              </Menu.Item>
+              <Menu.Item>
+                <Link to="/tournaments/created">Created by Me</Link>
+              </Menu.Item>
+              <Menu.Item>
+                <Link to="/tournaments">All Tournaments</Link>
+              </Menu.Item>
+            </Menu.SubMenu>
+          ) : (
+            <Menu.Item>
+              <Link to="/tournaments">Tournament</Link>
+            </Menu.Item>
+          )}
+          <Menu.SubMenu title="Resources">
+            <Menu.Item>
+              <Link to="/resources/platform">Platforms</Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link to="/resources/book">Books</Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link to="/resources/video">Teaching Videos</Link>
+            </Menu.Item>
+          </Menu.SubMenu>
           {isLoggedIn && (
             <Menu.Item>
               <Link to="/profile">Profile</Link>

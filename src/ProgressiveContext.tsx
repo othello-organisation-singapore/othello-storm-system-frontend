@@ -26,7 +26,7 @@ export function ProgressiveContextProvider({
   return (
     <ProgressiveContext.Provider
       value={{
-        screenType: width <= 550 ? ScreenType.Mobile : ScreenType.Desktop,
+        screenType: width <= 650 ? ScreenType.Mobile : ScreenType.Desktop,
       }}
     >
       {children}
