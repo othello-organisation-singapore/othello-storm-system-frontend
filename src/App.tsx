@@ -8,6 +8,9 @@ import { UserContextProvider } from 'UserContext';
 import Menu from 'pages/Menu';
 import HomePage from 'pages/HomePage';
 import LoginPage from 'pages/LoginPage';
+import About from 'pages/About';
+import Tournament from 'pages/Tournament';
+import Resource from 'pages/Resource';
 
 const PageWrapper = styled.div`
   padding: 30px 40px;
@@ -32,7 +35,10 @@ function App() {
             <PageWrapper>
               <Switch>
                 <Route exact path="/" component={HomePage} />
+                <Route path="/about" component={About} />
                 <Route path="/login" component={LoginPage} />
+                <Route path="/tournaments" component={Tournament} />
+                <Route path="/resources" component={Resource} />
                 <Redirect to="/" />
               </Switch>
             </PageWrapper>

@@ -79,18 +79,18 @@ function DesktopMenu() {
         {isLoggedIn ? (
           <Menu.SubMenu title="Tournament">
             <Menu.Item>
-              <Link to="/tournaments/managed">My Tournaments</Link>
+              <Link to="/tournaments/managed">Managed by Me</Link>
             </Menu.Item>
             <Menu.Item>
               <Link to="/tournaments/created">Created by Me</Link>
             </Menu.Item>
             <Menu.Item>
-              <Link to="/tournaments">All Tournaments</Link>
+              <Link to="/tournaments/all">All Tournaments</Link>
             </Menu.Item>
           </Menu.SubMenu>
         ) : (
           <Menu.Item>
-            <Link to="/tournaments">Tournament</Link>
+            <Link to="/tournaments/all">Tournament</Link>
           </Menu.Item>
         )}
         <Menu.SubMenu title="Resources">
@@ -158,18 +158,18 @@ function MobileMenu() {
           {isLoggedIn ? (
             <Menu.SubMenu title="Tournament">
               <Menu.Item>
-                <Link to="/tournaments/managed">My Tournaments</Link>
+                <Link to="/tournaments/managed">Managed by Me</Link>
               </Menu.Item>
               <Menu.Item>
                 <Link to="/tournaments/created">Created by Me</Link>
               </Menu.Item>
               <Menu.Item>
-                <Link to="/tournaments">All Tournaments</Link>
+                <Link to="/tournaments/all">All Tournaments</Link>
               </Menu.Item>
             </Menu.SubMenu>
           ) : (
             <Menu.Item>
-              <Link to="/tournaments">Tournament</Link>
+              <Link to="/tournaments/all">Tournament</Link>
             </Menu.Item>
           )}
           <Menu.SubMenu title="Resources">
