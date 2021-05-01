@@ -4,9 +4,9 @@ import { useHistory } from 'react-router-dom';
 
 import { message } from 'antd';
 
-import { UserRole, HttpMethod, HttpErrorCode } from 'enums';
+import { UserRole, HttpMethod } from 'enums';
 import useFetch from 'hooks/useFetch';
-import { HttpResponseError } from 'interfaces';
+import useToastPushError from 'hooks/useToastPushError';
 import { setCookie, removeCookie } from './utils';
 
 interface User {
@@ -16,13 +16,15 @@ interface User {
   jwt?: string;
 }
 
+type LoginCallback = (username: string, password: string) => void;
+type LogoutCallback = () => void;
+
 interface UserContext {
   user?: User;
   isLoggedIn: boolean;
-  logout: Function;
-  login: Function;
-  isLoginLoading: boolean;
-  loginErrorDetails: HttpResponseError;
+  logout: LogoutCallback;
+  login: LoginCallback;
+  isLoading: boolean;
 }
 
 const UserContext = createContext({
@@ -30,8 +32,7 @@ const UserContext = createContext({
   isLoggedIn: false,
   logout: () => {},
   login: (_username: string, _password: string) => {},
-  isLoginLoading: false,
-  loginErrorDetails: { code: HttpErrorCode.NoError, message: '' },
+  isLoading: false,
 });
 export const useUserContext = (): UserContext => useContext(UserContext);
 
@@ -47,11 +48,8 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
   const refreshUser = () => setUser(getLoggedInUserData());
   const history = useHistory();
 
-  const {
-    request: loginRequest,
-    isLoading: isLoginLoading,
-    error: loginErrorDetails,
-  } = useFetch();
+  const { request: loginRequest, isLoading } = useFetch();
+  const { pushError } = useToastPushError();
 
   const logout = () => {
     removeCookie('username');
@@ -62,12 +60,14 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
     refreshUser();
   };
   const login = async (username: string, password: string) => {
-    const response = await loginRequest('/api/login', HttpMethod.POST, {
-      username,
-      password,
-    });
+    const { response, error } = await loginRequest(
+      '/api/login/',
+      HttpMethod.POST,
+      { username, password }
+    );
 
-    if (response === undefined) {
+    if (response === '') {
+      pushError(error.code);
       return;
     }
 
@@ -88,8 +88,7 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
         isLoggedIn: user.role !== UserRole.Visitor,
         logout,
         login,
-        isLoginLoading,
-        loginErrorDetails,
+        isLoading,
       }}
     >
       {children}

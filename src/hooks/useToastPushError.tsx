@@ -30,7 +30,8 @@ function useToastPushError(
       case HttpErrorCode.AuthenticationFailed:
         pushMessage(
           <>
-            Your account is not available in our database.
+            Either your account is not available, or you entered wrong
+            credentials.
             <br />
             Please try to re-log, or contact admin if this issue persists.
           </>
@@ -54,10 +55,10 @@ function useToastPushError(
           </>
         );
         return;
-      case HttpErrorCode.ExternalConnectionError:
+      case HttpErrorCode.TokenExpired:
         pushMessage('Your session has expired, please re-log to continue.');
         return;
-      case HttpErrorCode.TokenExpired:
+      case HttpErrorCode.ExternalConnectionError:
         pushMessage(
           <>
             Network error, this app cannot access external sources.
