@@ -45,14 +45,22 @@ function HomePage() {
         The modern way to manage Othello tournaments.
       </StyledSubtitle>
       <CardsWrapper>
-        <HomePageInfoCard link="/about/othello" title="About Othello" imgSrc={Othello}>
+        <HomePageInfoCard
+          link="/about/othello"
+          title="About Othello"
+          imgSrc={Othello}
+        >
           What is Othello?
           <br />
           How do I get started in Othello?
           <br />
           How do I join Othello community?
         </HomePageInfoCard>
-        <HomePageInfoCard link="/about/oss" title="About Othello Storm" imgSrc={Storm}>
+        <HomePageInfoCard
+          link="/about/oss"
+          title="About Othello Storm"
+          imgSrc={Storm}
+        >
           Why Othello Storm need to exist?
           <br />
           What features are available?
