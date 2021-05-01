@@ -16,11 +16,14 @@ interface User {
   jwt?: string;
 }
 
+type LoginCallback = (username: string, password: string) => void;
+type LogoutCallback = () => void;
+
 interface UserContext {
   user?: User;
   isLoggedIn: boolean;
-  logout: Function;
-  login: Function;
+  logout: LogoutCallback;
+  login: LoginCallback;
   isLoading: boolean;
 }
 

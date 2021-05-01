@@ -55,10 +55,10 @@ function useToastPushError(
           </>
         );
         return;
-      case HttpErrorCode.ExternalConnectionError:
+      case HttpErrorCode.TokenExpired:
         pushMessage('Your session has expired, please re-log to continue.');
         return;
-      case HttpErrorCode.TokenExpired:
+      case HttpErrorCode.ExternalConnectionError:
         pushMessage(
           <>
             Network error, this app cannot access external sources.

@@ -7,7 +7,7 @@ const { Title } = Typography;
 import Othello from 'images/Othello.jpeg';
 import Storm from 'images/Storm.jpeg';
 import Trophy from 'images/Trophy.jpeg';
-import { InfoCard } from './parts';
+import { HomePageInfoCard } from './parts';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -45,27 +45,27 @@ function HomePage() {
         The modern way to manage Othello tournaments.
       </StyledSubtitle>
       <CardsWrapper>
-        <InfoCard link="/about/othello" title="About Othello" imgSrc={Othello}>
+        <HomePageInfoCard link="/about/othello" title="About Othello" imgSrc={Othello}>
           What is Othello?
           <br />
           How do I get started in Othello?
           <br />
           How do I join Othello community?
-        </InfoCard>
-        <InfoCard link="/about/oss" title="About Othello Storm" imgSrc={Storm}>
+        </HomePageInfoCard>
+        <HomePageInfoCard link="/about/oss" title="About Othello Storm" imgSrc={Storm}>
           Why Othello Storm need to exist?
           <br />
           What features are available?
           <br />
           How do I use Othello Storm?
-        </InfoCard>
-        <InfoCard
+        </HomePageInfoCard>
+        <HomePageInfoCard
           link="/tournaments"
           title="Check Tournament Lists"
           imgSrc={Trophy}
         >
           Check all the tournaments that has been created in Othello Storm!
-        </InfoCard>
+        </HomePageInfoCard>
       </CardsWrapper>
     </PageWrapper>
   );

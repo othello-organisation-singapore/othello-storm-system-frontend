@@ -40,19 +40,19 @@ const StyledCardContent = styled.div`
   text-align: left;
 `;
 
-interface InfoCardProps {
+interface HomePageInfoCardProps {
   children: ReactNode;
   link: string;
   title: ReactNode;
   imgSrc?: string;
 }
 
-export function InfoCard({
+export function HomePageInfoCard({
   children,
   link,
   title,
   imgSrc = '',
-}: InfoCardProps) {
+}: HomePageInfoCardProps) {
   return (
     <Link to={link}>
       <StyledCard>
