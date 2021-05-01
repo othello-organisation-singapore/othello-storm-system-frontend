@@ -10,7 +10,7 @@ import HomePage from 'pages/HomePage';
 import LoginPage from 'pages/LoginPage';
 import About from 'pages/About';
 import Tournament from 'pages/Tournament';
-import Resource from 'pages/Resource';
+import Resources from 'pages/Resources';
 
 const PageWrapper = styled.div`
   padding: 30px 40px;
@@ -38,7 +38,7 @@ function App() {
                 <Route path="/about" component={About} />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/tournaments" component={Tournament} />
-                <Route path="/resources" component={Resource} />
+                <Route path="/resources" component={Resources} />
                 <Redirect to="/" />
               </Switch>
             </PageWrapper>

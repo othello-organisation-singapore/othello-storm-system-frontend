@@ -5,7 +5,7 @@ import ResourceBookPage from './ResourceBookPage';
 import ResourcePlatformPage from './ResourcePlatformPage';
 import ResourceVideoPage from './ResourceVideoPage';
 
-function Resource() {
+function Resources() {
   const { path } = useRouteMatch();
   return (
     <Switch>
@@ -17,4 +17,4 @@ function Resource() {
   );
 }
 
-export default Resource;
+export default Resources;
