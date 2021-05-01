@@ -3,15 +3,10 @@ import styled from 'styled-components';
 
 import { Typography, Input, Button } from 'antd';
 
+import { PageTitle } from 'components/Typography';
 import { useUserContext } from '../UserContext';
 
-const { Title, Text } = Typography;
-
-const StyledTitle = styled(Title)`
-  && {
-    margin-bottom: 30px;
-  }
-`;
+const { Text } = Typography;
 
 const LoginPageWrapper = styled.div`
   display: flex;
@@ -37,7 +32,7 @@ function LoginPage() {
 
   return (
     <LoginPageWrapper>
-      <StyledTitle level={2}>Login</StyledTitle>
+      <PageTitle>Login</PageTitle>
       <div>
         <div>
           <Text>Username</Text>

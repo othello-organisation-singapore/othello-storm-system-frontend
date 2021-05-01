@@ -15,6 +15,11 @@ const StyledCard = styled(InfoCard)`
   > * {
     padding: 0;
   }
+
+  &:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
 `;
 
 const StyledCardTitle = styled(Title).attrs({ level: 3 })`

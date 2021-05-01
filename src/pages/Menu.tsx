@@ -117,7 +117,7 @@ function DesktopMenu() {
           </>
         ) : (
           <Button type="primary">
-            <Link to="login">Login</Link>
+            <Link to="/login">Login</Link>
           </Button>
         )}
       </MenuProfileGroup>
