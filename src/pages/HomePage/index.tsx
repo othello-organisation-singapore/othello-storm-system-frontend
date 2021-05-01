@@ -57,7 +57,7 @@ function HomePage() {
           How do I join Othello community?
         </HomePageInfoCard>
         <HomePageInfoCard
-          link="/about/oss"
+          link="/about/othellostorm"
           title="About Othello Storm"
           imgSrc={Storm}
         >
