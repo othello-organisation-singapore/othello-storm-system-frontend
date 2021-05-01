@@ -17,7 +17,8 @@ function AboutWOFPage() {
       <InfoBlock title="What is WOF?">
         WOF (World Othello Federation) is the official organisation that
         comprises of multiple countries worldwide, which aim to promote the game
-        of Othello. More details can be found in their official website{' '}
+        of Othello. <br />
+        More details can be found in their official website{' '}
         <ExternalLink to="https://www.worldothello.org/">here</ExternalLink>.
       </InfoBlock>
       <InfoBlock title="Is there an Othello organisation in my country?">
@@ -34,9 +35,11 @@ function AboutWOFPage() {
         <ExternalLink to="https://www.worldothello.org/about/tournaments/world-othello-championship">
           World Othello Championship (WOC)
         </ExternalLink>
-        . Usually, each countries also has their own official tournaments for
-        WOC selection. Please contact your country PIC to get a more specific
-        details for the tournaments in your country.
+        . <br />
+        Usually, each countries also has their own official tournaments for WOC
+        selection. <br />
+        Please contact your country PIC to get a more specific details for the
+        tournaments in your country.
       </InfoBlock>
       <InfoBlock title="Is there official rating or title in Othello?">
         Othello's official rating can be accessed in{' '}

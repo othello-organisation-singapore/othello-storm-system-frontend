@@ -17,8 +17,9 @@ function AboutOthelloPage() {
         Othello is a competitive mind sport that is played using an 8 x 8 board
         and set of distinct double sided discs for each side (typically light
         and dark color on different sides of the discs), where each side
-        belonging to one player. The players' aim is to have their disc side
-        dominated the board at the end of the game.
+        belonging to one player. <br />
+        The players' aim is to have their disc side dominated the board at the
+        end of the game.
       </InfoBlock>
       <InfoBlock title="What are the rules of Othello?">
         Please check the official rules of Othello{' '}

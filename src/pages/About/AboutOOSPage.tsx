@@ -24,10 +24,11 @@ function AboutOOSPage() {
         WOF for Singapore players.
       </InfoBlock>
       <InfoBlock title="Does OOS organize tournament regularly?">
-        Yes!. Usually, OOS organized several tournaments in a year, comprises of
-        Singapore Opens, Singapore National Othello Championship (SNOC), and
-        Singapore Othello Master Series (SOMS). OOS handbook for this year
-        (2021) can be found{' '}
+        Yes!
+        <br /> Usually, OOS organized several tournaments in a year, comprises
+        of Singapore Opens, Singapore National Othello Championship (SNOC), and
+        Singapore Othello Master Series (SOMS). <br />
+        OOS handbook for this year (2021) can be found{' '}
         <ExternalLink to="https://drive.google.com/file/d/14rsO7c_jMxQuQasPw4n-jPbA2Cu5B9G3/view?usp=sharing">
           here
         </ExternalLink>
@@ -37,8 +38,9 @@ function AboutOOSPage() {
       </InfoBlock>
       <InfoBlock title="Does OOS actively join World Othello Championship (WOC)?">
         Yes, OOS actively send people to join World Othello Championship, and
-        consistently getting decent results. If you are interested to represent
-        OOS for WOC, can start by joining Singapore local tournaments ;).
+        consistently getting decent results. <br />
+        If you are interested to represent OOS for WOC, can start by joining
+        Singapore local tournaments ;).
       </InfoBlock>
       <InfoBlock title="How do I reach out to OOS?">
         Please contact Alex (kohbochao@gmail.com) or Samuel
