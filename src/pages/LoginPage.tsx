@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import { Typography, Input, Button } from 'antd';
 
-import { PageTitle } from 'components/Typography';
-import { useUserContext } from '../UserContext';
+import { PageTitle } from 'components/common';
+import { useUserContext } from 'components/UserContext';
 
 const { Text } = Typography;
 

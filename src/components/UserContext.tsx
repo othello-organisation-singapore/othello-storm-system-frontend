@@ -4,10 +4,11 @@ import { useHistory } from 'react-router-dom';
 
 import { message } from 'antd';
 
-import { UserRole, HttpMethod } from 'enums';
+import { UserRole, HttpMethod } from 'utils/enums';
 import useFetch from 'hooks/useFetch';
 import useToastPushError from 'hooks/useToastPushError';
-import { setCookie, removeCookie } from './utils';
+import { UserResponse } from 'utils/apiResponseShape';
+import { setCookie, removeCookie } from 'utils/cookie';
 
 interface User {
   username?: string;
@@ -48,7 +49,7 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
   const refreshUser = () => setUser(getLoggedInUserData());
   const history = useHistory();
 
-  const { request: loginRequest, isLoading } = useFetch();
+  const { request: loginRequest, isLoading } = useFetch<UserResponse>();
   const { pushError } = useToastPushError();
 
   const logout = () => {

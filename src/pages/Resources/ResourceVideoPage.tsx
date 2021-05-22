@@ -1,8 +1,6 @@
 import React from 'react';
 
-import ExternalLink from 'components/ExternalLink';
-import InfoBlock from 'components/InfoBlock';
-import { PageTitle } from 'components/Typography';
+import { ExternalLink, InfoBlock, PageTitle } from 'components/common';
 
 function ResourceVideoPage() {
   return (

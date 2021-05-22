@@ -7,7 +7,7 @@ import {
 } from 'react';
 import debounce from 'lodash/debounce';
 
-import { ScreenType } from 'enums';
+import { ScreenType } from 'utils/enums';
 
 const ProgressiveContext = createContext({ screenType: ScreenType.Desktop });
 export const useProgressiveContext = () => useContext(ProgressiveContext);

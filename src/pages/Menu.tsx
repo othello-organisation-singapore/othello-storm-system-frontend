@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import { Menu, Button } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 
-import { ScreenType } from 'enums';
-import { useUserContext } from 'UserContext';
-import { useProgressiveContext } from 'ProgressiveContext';
+import { useUserContext } from 'components/UserContext';
+import { useProgressiveContext } from 'components/ProgressiveContext';
+import { ScreenType } from 'utils/enums';
 
 const MenuRow = styled.div`
   display: flex;

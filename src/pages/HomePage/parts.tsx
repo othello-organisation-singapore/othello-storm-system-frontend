@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Typography } from 'antd';
 const { Title, Text } = Typography;
 
-import InfoCard from 'components/InfoCard';
+import { InfoCard } from 'components/common';
 
 const StyledCard = styled(InfoCard)`
   width: 300px;

@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
-import InfoCard from 'components/InfoCard';
+import InfoCard from 'components/common/InfoCard';
 
 const InfoCardWrapper = styled.div`
   padding-bottom: 10px;

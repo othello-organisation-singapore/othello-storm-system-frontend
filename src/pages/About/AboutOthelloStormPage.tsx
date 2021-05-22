@@ -3,9 +3,7 @@ import React from 'react';
 import { Typography } from 'antd';
 const { Text } = Typography;
 
-import ExternalLink from 'components/ExternalLink';
-import InfoBlock from 'components/InfoBlock';
-import { PageTitle } from 'components/Typography';
+import { ExternalLink, InfoBlock, PageTitle } from 'components/common';
 
 function AboutOthelloStormPage() {
   return (

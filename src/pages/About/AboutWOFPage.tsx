@@ -1,9 +1,12 @@
 import React from 'react';
 
-import CaptionedImage, { CaptionedImageGroup } from 'components/CaptionedImage';
-import ExternalLink from 'components/ExternalLink';
-import InfoBlock from 'components/InfoBlock';
-import { PageTitle } from 'components/Typography';
+import {
+  ExternalLink,
+  InfoBlock,
+  PageTitle,
+  CaptionedImage,
+  CaptionedImageGroup,
+} from 'components/common';
 import WOC2019TournamentRoom from 'images/WOC2019TournamentRoom.jpeg';
 import WOC2019Final from 'images/WOC2019Final.jpeg';
 import WOC2019Winners from 'images/WOC2019Winners.jpeg';

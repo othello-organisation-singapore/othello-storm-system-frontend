@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import CaptionedImage, { CaptionedImageGroup } from 'components/CaptionedImage';
-import ExternalLink from 'components/ExternalLink';
-import InfoBlock from 'components/InfoBlock';
-import { PageTitle } from 'components/Typography';
+import {
+  ExternalLink,
+  InfoBlock,
+  PageTitle,
+  CaptionedImage,
+  CaptionedImageGroup,
+} from 'components/common';
 import OthelloMatch from 'images/OthelloMatch.jpeg';
 import OthelloSet from 'images/OthelloSet.jpeg';
 import OthelloSetup from 'images/OthelloSetup.jpeg';

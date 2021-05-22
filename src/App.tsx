@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { ProgressiveContextProvider } from 'ProgressiveContext';
-import { ThemeContextProvider } from 'ThemeContext';
-import { UserContextProvider } from 'UserContext';
+import { ProgressiveContextProvider } from 'components/ProgressiveContext';
+import { ThemeContextProvider } from 'components/ThemeContext';
+import { UserContextProvider } from 'components/UserContext';
 import Menu from 'pages/Menu';
 import HomePage from 'pages/HomePage';
 import LoginPage from 'pages/LoginPage';

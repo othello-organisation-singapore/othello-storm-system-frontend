@@ -2,7 +2,7 @@ import React, { ReactNode, useCallback } from 'react';
 
 import { message } from 'antd';
 
-import { HttpErrorCode } from 'enums';
+import { HttpErrorCode } from 'utils/enums';
 
 type ErrorMessageOverride = { [errorCode in HttpErrorCode]: ReactNode };
 
