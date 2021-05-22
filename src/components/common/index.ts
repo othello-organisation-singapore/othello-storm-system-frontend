@@ -5,4 +5,5 @@ export {
 export { default as ExternalLink } from './ExternalLink';
 export { default as InfoBlock } from './InfoBlock';
 export { default as InfoCard } from './InfoCard';
-export { PageTitle } from './Typography';
+export { Row } from './Layout';
+export { PageTitle, FormLabel } from './Typography';

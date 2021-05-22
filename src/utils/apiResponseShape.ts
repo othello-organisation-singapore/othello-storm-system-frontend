@@ -9,3 +9,7 @@ export interface User {
 export interface LoginResponse extends User {
   jwt: string;
 }
+
+export interface MessageResponse {
+  message: string;
+}

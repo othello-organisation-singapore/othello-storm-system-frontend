@@ -8,11 +8,9 @@ import {
 import { parse } from 'cookie';
 import { useHistory } from 'react-router-dom';
 
-import { message } from 'antd';
-
-import { UserRole, HttpMethod } from 'utils/enums';
+import { UserRole } from 'utils/enums';
 import useFetch from 'hooks/useFetch';
-import useToastPushError from 'hooks/useToastPushError';
+import useToastPushSubmit from 'hooks/useToastPushSubmit';
 import { LoginResponse, User } from 'utils/apiResponseShape';
 import { setCookie, removeCookie } from 'utils/cookie';
 
@@ -39,49 +37,53 @@ const getLoggedInUserData = (): LoginResponse => {
 
 export function UserContextProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState(getLoggedInUserData());
-  const refreshUser = useCallback(() => setUser(getLoggedInUserData()), []);
+  const refreshUser = useCallback(() => setUser(getLoggedInUserData()), [
+    setUser,
+  ]);
   const history = useHistory();
 
   const { request: loginRequest, isLoading } = useFetch<LoginResponse>();
   const { request: currentUserRequest } = useFetch<User>();
-  const { pushError } = useToastPushError();
+  const { pushError, pushSuccess } = useToastPushSubmit();
 
   const logout = useCallback(() => {
     removeCookie('username');
     removeCookie('displayName');
     removeCookie('role');
     removeCookie('jwt');
-    message.info('You have been logged out', 1.5);
+    pushSuccess('You have been logged out');
     refreshUser();
-  }, []);
+  }, [pushSuccess, refreshUser]);
 
-  const login = useCallback(async (username: string, password: string) => {
-    const { response, error } = await loginRequest(
-      '/api/login/',
-      HttpMethod.POST,
-      { username, password }
-    );
+  const login = useCallback(
+    async (username: string, password: string) => {
+      const { response, error } = await loginRequest('/api/login/', 'POST', {
+        username,
+        password,
+      });
 
-    if (response === '') {
-      pushError(error.code);
+      if (response === '') {
+        pushError(error.code);
+        return;
+      }
+
+      const { jwt, username: loggedInUsername, displayName, role } = response;
+      setCookie('username', loggedInUsername);
+      setCookie('displayName', displayName);
+      setCookie('role', role);
+      setCookie('jwt', jwt);
+      pushSuccess('You have been logged in');
+      refreshUser();
+      history.push('/');
       return;
-    }
-
-    const { jwt, username: loggedInUsername, displayName, role } = response;
-    setCookie('username', loggedInUsername);
-    setCookie('displayName', displayName);
-    setCookie('role', role);
-    setCookie('jwt', jwt);
-    message.info('You have been logged in', 1.5);
-    refreshUser();
-    history.push('/');
-    return;
-  }, []);
+    },
+    [history, loginRequest, pushError, pushSuccess, refreshUser]
+  );
 
   const updateCurrentUser = useCallback(async () => {
     const { response, error } = await currentUserRequest(
       '/api/profile/',
-      HttpMethod.GET
+      'GET'
     );
 
     if (response === '') {
@@ -95,7 +97,7 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
     setCookie('role', role);
     refreshUser();
     return;
-  }, []);
+  }, [currentUserRequest, pushError, refreshUser]);
 
   return (
     <UserContext.Provider

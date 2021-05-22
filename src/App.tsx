@@ -4,13 +4,14 @@ import styled from 'styled-components';
 
 import { ProgressiveContextProvider } from 'components/ProgressiveContext';
 import { ThemeContextProvider } from 'components/ThemeContext';
-import { UserContextProvider } from 'components/UserContext';
+import { UserContextProvider, useUserContext } from 'components/UserContext';
 import Menu from 'pages/Menu';
 import HomePage from 'pages/HomePage';
 import LoginPage from 'pages/LoginPage';
 import About from 'pages/About';
 import Tournament from 'pages/Tournament';
 import Resources from 'pages/Resources';
+import ProfilePage from 'pages/ProfilePage';
 
 const PageWrapper = styled.div`
   padding: 30px 40px;
@@ -33,19 +34,27 @@ function App() {
           <UserContextProvider>
             <Menu />
             <PageWrapper>
-              <Switch>
-                <Route exact path="/" component={HomePage} />
-                <Route path="/about" component={About} />
-                <Route path="/login" component={LoginPage} />
-                <Route path="/tournaments" component={Tournament} />
-                <Route path="/resources" component={Resources} />
-                <Redirect to="/" />
-              </Switch>
+              <Routes />
             </PageWrapper>
           </UserContextProvider>
         </ThemeContextProvider>
       </ProgressiveContextProvider>
     </BrowserRouter>
+  );
+}
+
+function Routes() {
+  const { isLoggedIn } = useUserContext();
+  return (
+    <Switch>
+      <Route exact path="/" component={HomePage} />
+      <Route path="/about" component={About} />
+      <Route path="/login" component={LoginPage} />
+      <Route path="/tournaments" component={Tournament} />
+      <Route path="/resources" component={Resources} />
+      {isLoggedIn && <Route path="/profile" component={ProfilePage} />}
+      <Redirect to="/" />
+    </Switch>
   );
 }
 

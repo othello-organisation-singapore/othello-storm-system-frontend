@@ -40,7 +40,7 @@ function useFetch<TResPayload>() {
 
       return {
         response: camelcasedResponse.success,
-        error: camelcasedResponse?.error,
+        error: camelcasedResponse.error,
       };
     },
     []

@@ -32,7 +32,7 @@ function useGet<TResPayload>(
     const controller = new AbortController();
     const query = keys(params).length > 0 ? `?${joinParams(params)}` : '';
 
-    request(`${path}${query}`, HttpMethod.GET).then(({ response, error }) => {
+    request(`${path}${query}`, 'GET').then(({ response, error }) => {
       setError(error);
       if (!controller.signal.aborted && error.code === 0) {
         setData(response);
