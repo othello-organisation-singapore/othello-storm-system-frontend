@@ -6,6 +6,7 @@ import {
   PageTitle,
   CaptionedImage,
   CaptionedImageGroup,
+  PageWrapper,
 } from 'components/common';
 import AlexKoh from 'images/AlexKoh.jpeg';
 import AlexLastTable from 'images/AlexLastTable.jpeg';
@@ -20,7 +21,7 @@ import SNOC2019 from 'images/SNOC2019.jpeg';
 
 function AboutOOSPage() {
   return (
-    <div>
+    <PageWrapper>
       <PageTitle>About Othello Organisation Singapore (OOS)</PageTitle>
       <InfoBlock title="What is OOS?">
         OOS (Othello Organisation Singapore) is the official organisation under
@@ -92,7 +93,7 @@ function AboutOOSPage() {
           Champion) that ends in a very tight game.
         </CaptionedImage>
       </CaptionedImageGroup>
-    </div>
+    </PageWrapper>
   );
 }
 

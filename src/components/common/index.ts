@@ -3,7 +3,9 @@ export {
   CaptionedImageGroup,
 } from './CaptionedImage';
 export { default as ExternalLink } from './ExternalLink';
+export { FormItem } from './Form';
 export { default as InfoBlock } from './InfoBlock';
 export { default as InfoCard } from './InfoCard';
 export { Row } from './Layout';
-export { PageTitle, FormLabel } from './Typography';
+export { default as PageWrapper } from './PageWrapper';
+export { PageTitle, FormLabel, GroupTitle } from './Typography';

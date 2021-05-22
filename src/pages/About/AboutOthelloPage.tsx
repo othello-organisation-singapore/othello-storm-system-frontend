@@ -7,6 +7,7 @@ import {
   PageTitle,
   CaptionedImage,
   CaptionedImageGroup,
+  PageWrapper,
 } from 'components/common';
 import OthelloMatch from 'images/OthelloMatch.jpeg';
 import OthelloSet from 'images/OthelloSet.jpeg';
@@ -14,7 +15,7 @@ import OthelloSetup from 'images/OthelloSetup.jpeg';
 
 function AboutOthelloPage() {
   return (
-    <div>
+    <PageWrapper>
       <PageTitle>About Othello</PageTitle>
       <InfoBlock title="What is Othello?">
         Othello is a competitive mind sport that is played using an 8 x 8 board
@@ -48,7 +49,7 @@ function AboutOthelloPage() {
           An official tournament of Othello.
         </CaptionedImage>
       </CaptionedImageGroup>
-    </div>
+    </PageWrapper>
   );
 }
 

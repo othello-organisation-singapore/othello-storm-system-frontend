@@ -5,45 +5,30 @@ import { Form, Input, Button, Collapse, Typography } from 'antd';
 const { Text } = Typography;
 const { Panel } = Collapse;
 
-import { PageTitle, FormLabel, Row } from 'components/common';
+import {
+  PageTitle,
+  FormLabel,
+  Row,
+  PageWrapper,
+  FormItem,
+} from 'components/common';
 import { useUserContext } from 'components/UserContext';
 import useFetch from 'hooks/useFetch';
 import useToastPushSubmit from 'hooks/useToastPushSubmit';
 import { MessageResponse } from 'utils/apiResponseShape';
 
-const ProfilePageWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 const StyledForm = styled(Form)`
   width: 100%;
 `;
 
-const StyledFormItem = styled(Form.Item)`
+const StyledFormItem = styled(FormItem)`
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 12px;
-
-  @media only screen and (min-width: 550px) {
-    width: 500px;
-  }
-
-  & > :first-child {
-    flex-basis: 150px;
-    display: flex;
-    justify-content: flex-start;
-  }
 `;
 
 const StyledCollapse = styled(Collapse)`
   margin-left: auto;
   margin-right: auto;
-
-  @media only screen and (min-width: 550px) {
-    width: 500px;
-  }
 
   @media only screen and (max-width: 575px) {
     margin-left: -16px;
@@ -64,10 +49,6 @@ const StyledRow = styled(Row)`
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-
-  @media only screen and (min-width: 550px) {
-    width: 500px;
-  }
 `;
 
 function ProfilePage() {
@@ -111,7 +92,7 @@ function ProfilePage() {
   };
 
   return (
-    <ProfilePageWrapper>
+    <PageWrapper>
       <PageTitle>Profile</PageTitle>
       <StyledForm>
         <StyledFormItem label={<FormLabel>Username</FormLabel>}>
@@ -161,7 +142,7 @@ function ProfilePage() {
           </Button>
         </StyledRow>
       </StyledForm>
-    </ProfilePageWrapper>
+    </PageWrapper>
   );
 }
 

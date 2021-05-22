@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Typography, Input, Button } from 'antd';
+import { Input, Button } from 'antd';
 
 import { PageTitle, FormLabel } from 'components/common';
 import { useUserContext } from 'components/UserContext';
-
-const { Text } = Typography;
 
 const LoginPageWrapper = styled.div`
   display: flex;

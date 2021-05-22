@@ -7,7 +7,7 @@ import { MenuOutlined } from '@ant-design/icons';
 
 import { useUserContext } from 'components/UserContext';
 import { useProgressiveContext } from 'components/ProgressiveContext';
-import { ScreenType } from 'utils/enums';
+import { ScreenType, UserRole } from 'utils/enums';
 
 const MenuRow = styled.div`
   display: flex;
@@ -54,7 +54,7 @@ function OSSMenu() {
 }
 
 function DesktopMenu() {
-  const { isLoggedIn, logout } = useUserContext();
+  const { isLoggedIn, logout, user } = useUserContext();
 
   return (
     <MenuRow>
@@ -105,12 +105,24 @@ function DesktopMenu() {
           </Menu.Item>
         </Menu.SubMenu>
       </MenuAppGroup>
+
       <MenuProfileGroup>
         {isLoggedIn ? (
           <>
-            <Menu.Item>
-              <Link to="/profile">Profile</Link>
-            </Menu.Item>
+            {user.role === UserRole.Superuser ? (
+              <Menu.SubMenu title="Profile">
+                <Menu.Item>
+                  <Link to="/profile">Profile</Link>
+                </Menu.Item>
+                <Menu.Item>
+                  <Link to="/superuser">Superuser Panel</Link>
+                </Menu.Item>
+              </Menu.SubMenu>
+            ) : (
+              <Menu.Item>
+                <Link to="/profile">Profile</Link>
+              </Menu.Item>
+            )}
             <StyledButton type="primary" danger onClick={() => logout()}>
               Logout
             </StyledButton>
@@ -126,7 +138,7 @@ function DesktopMenu() {
 }
 
 function MobileMenu() {
-  const { isLoggedIn, logout } = useUserContext();
+  const { isLoggedIn, logout, user } = useUserContext();
 
   return (
     <MenuRow>
@@ -184,9 +196,22 @@ function MobileMenu() {
             </Menu.Item>
           </Menu.SubMenu>
           {isLoggedIn && (
-            <Menu.Item>
-              <Link to="/profile">Profile</Link>
-            </Menu.Item>
+            <>
+              {user.role === UserRole.Superuser ? (
+                <Menu.SubMenu title="Profile">
+                  <Menu.Item>
+                    <Link to="/profile">Profile</Link>
+                  </Menu.Item>
+                  <Menu.Item>
+                    <Link to="/superuser">Superuser Panel</Link>
+                  </Menu.Item>
+                </Menu.SubMenu>
+              ) : (
+                <Menu.Item>
+                  <Link to="/profile">Profile</Link>
+                </Menu.Item>
+              )}
+            </>
           )}
         </Menu.SubMenu>
       </MenuAppGroup>

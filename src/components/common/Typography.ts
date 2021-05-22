@@ -9,6 +9,12 @@ export const PageTitle = styled(Title).attrs({ level: 2 })`
   }
 `;
 
+export const GroupTitle = styled(Title).attrs({ level: 4 })`
+  && {
+    margin-bottom: 20px;
+  }
+`;
+
 export const FormLabel = styled(Text)`
   font-weight: bold;
 `;

@@ -6,6 +6,7 @@ import {
   PageTitle,
   CaptionedImage,
   CaptionedImageGroup,
+  PageWrapper,
 } from 'components/common';
 import WOC2019TournamentRoom from 'images/WOC2019TournamentRoom.jpeg';
 import WOC2019Final from 'images/WOC2019Final.jpeg';
@@ -15,7 +16,7 @@ import WOC2019FemaleChamp from 'images/WOC2019FemaleChamp.jpeg';
 
 function AboutWOFPage() {
   return (
-    <div>
+    <PageWrapper>
       <PageTitle>About World Othello Federation (WOF)</PageTitle>
       <InfoBlock title="What is WOF?">
         WOF (World Othello Federation) is the official organisation that
@@ -68,7 +69,7 @@ function AboutWOFPage() {
           Akihiro Takahashi (center), WOC 2019 Champion
         </CaptionedImage>
       </CaptionedImageGroup>
-    </div>
+    </PageWrapper>
   );
 }
 
