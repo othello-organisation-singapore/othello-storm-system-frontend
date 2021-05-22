@@ -1,12 +1,15 @@
 import React from 'react';
 
-import ExternalLink from 'components/ExternalLink';
-import InfoBlock from 'components/InfoBlock';
-import { PageTitle } from 'components/Typography';
+import {
+  ExternalLink,
+  InfoBlock,
+  PageTitle,
+  PageWrapper,
+} from 'components/common';
 
 function ResourceVideoPage() {
   return (
-    <div>
+    <PageWrapper>
       <PageTitle>Othello Resource (Video)</PageTitle>
       <InfoBlock title="Othello Academy">
         Othello Academy is a Youtube Channel created by Alex Koh, Othello
@@ -17,8 +20,13 @@ function ResourceVideoPage() {
         You can access the channel{' '}
         <ExternalLink to="https://www.youtube.com/channel/UC5gN3XtwfOaFFMZtNauXl2A">
           here
+        </ExternalLink>{' '}
+        or visit their page{' '}
+        <ExternalLink to="https://othelloacademy.weebly.com/">
+          here
         </ExternalLink>
-        . <br />
+        .
+        <br />
         Your subscription, likes, and shares are appreciated :). <br /> <br />
         <iframe
           style={{ maxWidth: '100%' }}
@@ -31,7 +39,7 @@ function ResourceVideoPage() {
           allowFullScreen
         />
       </InfoBlock>
-    </div>
+    </PageWrapper>
   );
 }
 

@@ -1,12 +1,15 @@
 import React from 'react';
 
-import ExternalLink from 'components/ExternalLink';
-import InfoBlock from 'components/InfoBlock';
-import { PageTitle } from 'components/Typography';
+import {
+  ExternalLink,
+  InfoBlock,
+  PageTitle,
+  PageWrapper,
+} from 'components/common';
 
 function ResourcePlatformPage() {
   return (
-    <div>
+    <PageWrapper>
       <PageTitle>Othello Resources (Online Platforms)</PageTitle>
       <InfoBlock title="Othello Quest">
         Othello Quest is the most widely used Othello Platforms by Othello
@@ -39,7 +42,7 @@ function ResourcePlatformPage() {
         </ExternalLink>{' '}
         .
       </InfoBlock>
-    </div>
+    </PageWrapper>
   );
 }
 

@@ -4,16 +4,23 @@ import toPairs from 'lodash/toPairs';
 import snakecaseKeys from 'snakecase-keys';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 
+import { HttpErrorCode, HttpMethod } from 'utils/enums';
 import useFetch from './useFetch';
-import { HttpErrorCode, HttpMethod } from 'enums';
 
-export const joinParams = (params: object) =>
+type ParamsValue = string | number | boolean;
+export const joinParams = (params: { [key: string]: ParamsValue }) =>
   toPairs(snakecaseKeys(params))
-    .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+    .map(
+      ([k, v]) =>
+        `${encodeURIComponent(k)}=${encodeURIComponent(v as ParamsValue)}`
+    )
     .join('&');
 
-function useGet(path: string, params: object = {}) {
-  const { request, isLoading } = useFetch();
+function useGet<TResPayload>(
+  path: string,
+  params: { [key: string]: ParamsValue } = {}
+) {
+  const { request, isLoading } = useFetch<TResPayload>();
   const [refreshKey, setRefreshKey] = useState(0);
   const [data, setData] = useState({});
   const [error, setError] = useState({
@@ -25,10 +32,10 @@ function useGet(path: string, params: object = {}) {
     const controller = new AbortController();
     const query = keys(params).length > 0 ? `?${joinParams(params)}` : '';
 
-    request(`${path}${query}`, HttpMethod.GET).then(({ response, error }) => {
+    request(`${path}${query}`, 'GET').then(({ response, error }) => {
       setError(error);
       if (!controller.signal.aborted && error.code === 0) {
-        setData(response.data);
+        setData(response);
       }
       return () => controller.abort();
     });

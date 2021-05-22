@@ -2,10 +2,10 @@ import { useCallback, useState } from 'react';
 import snakecaseKeys from 'snakecase-keys';
 import camelcaseKeys from 'camelcase-keys';
 
-import { HttpMethod } from 'enums';
-import { HttpResponse } from 'interfaces';
+import { HttpMethod } from 'utils/enums';
+import { HttpResponse } from 'utils/interfaces';
 
-function useFetch() {
+function useFetch<TResPayload>() {
   const [isLoading, setIsLoading] = useState(false);
 
   const request = useCallback(
@@ -31,7 +31,7 @@ function useFetch() {
       });
       setIsLoading(false);
 
-      const camelcasedResponse: HttpResponse = camelcaseKeys(
+      const camelcasedResponse: HttpResponse<TResPayload> = camelcaseKeys(
         await response.json(),
         {
           deep: true,
@@ -40,7 +40,7 @@ function useFetch() {
 
       return {
         response: camelcasedResponse.success,
-        error: camelcasedResponse?.error,
+        error: camelcasedResponse.error,
       };
     },
     []

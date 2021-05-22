@@ -3,13 +3,16 @@ import React from 'react';
 import { Typography } from 'antd';
 const { Text } = Typography;
 
-import ExternalLink from 'components/ExternalLink';
-import InfoBlock from 'components/InfoBlock';
-import { PageTitle } from 'components/Typography';
+import {
+  ExternalLink,
+  InfoBlock,
+  PageTitle,
+  PageWrapper,
+} from 'components/common';
 
 function AboutOthelloStormPage() {
   return (
-    <div>
+    <PageWrapper>
       <PageTitle>About Othello Storm System</PageTitle>
       <InfoBlock title="What is Othello Storm System?">
         Othello Storm System in an app, created by Othello Organisation
@@ -113,7 +116,7 @@ function AboutOthelloStormPage() {
         (samuelhenrykurniawan@yahoo.com) if you are interested to contribute to
         Othello Storm System, either in design, code, ideas, or even bug report.
       </InfoBlock>
-    </div>
+    </PageWrapper>
   );
 }
 

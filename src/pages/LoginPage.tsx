@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Typography, Input, Button } from 'antd';
+import { Input, Button } from 'antd';
 
-import { PageTitle } from 'components/Typography';
-import { useUserContext } from '../UserContext';
-
-const { Text } = Typography;
+import { PageTitle, FormLabel } from 'components/common';
+import { useUserContext } from 'components/UserContext';
 
 const LoginPageWrapper = styled.div`
   display: flex;
@@ -35,7 +33,7 @@ function LoginPage() {
       <PageTitle>Login</PageTitle>
       <div>
         <div>
-          <Text>Username</Text>
+          <FormLabel>Username</FormLabel>
         </div>
         <div>
           <StyledInput
@@ -45,7 +43,7 @@ function LoginPage() {
           />
         </div>
         <div>
-          <Text>Password</Text>
+          <FormLabel>Password</FormLabel>
         </div>
         <div>
           <StyledPasswordInput

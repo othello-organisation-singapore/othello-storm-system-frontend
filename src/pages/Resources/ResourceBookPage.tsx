@@ -1,12 +1,15 @@
 import React from 'react';
 
-import ExternalLink from 'components/ExternalLink';
-import InfoBlock from 'components/InfoBlock';
-import { PageTitle } from 'components/Typography';
+import {
+  ExternalLink,
+  InfoBlock,
+  PageTitle,
+  PageWrapper,
+} from 'components/common';
 
 function ResourceBookPage() {
   return (
-    <div>
+    <PageWrapper>
       <PageTitle>Othello Resource (Book)</PageTitle>
       <InfoBlock title="Brian Rose's Book">
         Brian Rose book titled 'Othello: A Minute to Learn, A Lifetime to
@@ -17,7 +20,7 @@ function ResourceBookPage() {
         </ExternalLink>
         .
       </InfoBlock>
-    </div>
+    </PageWrapper>
   );
 }
 

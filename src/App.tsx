@@ -2,15 +2,18 @@ import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { ProgressiveContextProvider } from 'ProgressiveContext';
-import { ThemeContextProvider } from 'ThemeContext';
-import { UserContextProvider } from 'UserContext';
+import { ProgressiveContextProvider } from 'components/ProgressiveContext';
+import { ThemeContextProvider } from 'components/ThemeContext';
+import { UserContextProvider, useUserContext } from 'components/UserContext';
 import Menu from 'pages/Menu';
 import HomePage from 'pages/HomePage';
 import LoginPage from 'pages/LoginPage';
 import About from 'pages/About';
-import Tournament from 'pages/Tournament';
+import ProfilePage from 'pages/ProfilePage';
 import Resources from 'pages/Resources';
+import SuperuserPage from 'pages/SuperuserPage';
+import Tournament from 'pages/Tournament';
+import { UserRole } from 'utils/enums';
 
 const PageWrapper = styled.div`
   padding: 30px 40px;
@@ -33,19 +36,30 @@ function App() {
           <UserContextProvider>
             <Menu />
             <PageWrapper>
-              <Switch>
-                <Route exact path="/" component={HomePage} />
-                <Route path="/about" component={About} />
-                <Route path="/login" component={LoginPage} />
-                <Route path="/tournaments" component={Tournament} />
-                <Route path="/resources" component={Resources} />
-                <Redirect to="/" />
-              </Switch>
+              <Routes />
             </PageWrapper>
           </UserContextProvider>
         </ThemeContextProvider>
       </ProgressiveContextProvider>
     </BrowserRouter>
+  );
+}
+
+function Routes() {
+  const { isLoggedIn, user } = useUserContext();
+  return (
+    <Switch>
+      <Route exact path="/" component={HomePage} />
+      <Route path="/about" component={About} />
+      <Route path="/login" component={LoginPage} />
+      <Route path="/tournaments" component={Tournament} />
+      <Route path="/resources" component={Resources} />
+      {isLoggedIn && <Route path="/profile" component={ProfilePage} />}
+      {user.role === UserRole.Superuser && (
+        <Route path="/superuser" component={SuperuserPage} />
+      )}
+      <Redirect to="/" />
+    </Switch>
   );
 }
 

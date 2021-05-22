@@ -1,8 +1,4 @@
-export enum HttpMethod {
-  GET = 'GET',
-  POST = 'POST',
-  DELETE = 'DELETE',
-}
+export type HttpMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
 export enum HttpRequestStatus {
   IDLE,
