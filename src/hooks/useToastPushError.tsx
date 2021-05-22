@@ -37,6 +37,9 @@ function useToastPushError(
           </>
         );
         return;
+      case HttpErrorCode.PermissionDenied:
+        pushMessage('You are not allowed to do this action');
+        return;
       case HttpErrorCode.AutomaticPairingError:
         pushMessage(
           <>

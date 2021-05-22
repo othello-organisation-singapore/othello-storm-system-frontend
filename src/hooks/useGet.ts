@@ -7,12 +7,19 @@ import useDeepCompareEffect from 'use-deep-compare-effect';
 import { HttpErrorCode, HttpMethod } from 'utils/enums';
 import useFetch from './useFetch';
 
-export const joinParams = (params: object) =>
+type ParamsValue = string | number | boolean;
+export const joinParams = (params: { [key: string]: ParamsValue }) =>
   toPairs(snakecaseKeys(params))
-    .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+    .map(
+      ([k, v]) =>
+        `${encodeURIComponent(k)}=${encodeURIComponent(v as ParamsValue)}`
+    )
     .join('&');
 
-function useGet<TResPayload>(path: string, params: object = {}) {
+function useGet<TResPayload>(
+  path: string,
+  params: { [key: string]: ParamsValue } = {}
+) {
   const { request, isLoading } = useFetch<TResPayload>();
   const [refreshKey, setRefreshKey] = useState(0);
   const [data, setData] = useState({});
