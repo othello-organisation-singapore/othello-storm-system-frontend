@@ -11,7 +11,7 @@ import { useHistory } from 'react-router-dom';
 import { UserRole } from 'utils/enums';
 import useFetch from 'hooks/useFetch';
 import useToastPushSubmit from 'hooks/useToastPushSubmit';
-import { LoginResponse, User } from 'utils/apiResponseShape';
+import { LoginResponse, User } from 'utils/apiResponseShapes';
 import { setCookie, removeCookie } from 'utils/cookie';
 
 type LoginCallback = (username: string, password: string) => void;

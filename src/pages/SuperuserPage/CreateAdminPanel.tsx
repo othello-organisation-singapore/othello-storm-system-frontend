@@ -6,7 +6,7 @@ import { Input, Button, Form } from 'antd';
 import { GroupTitle, FormLabel, FormItem } from 'components/common';
 import useToastPushSubmit from 'hooks/useToastPushSubmit';
 import useFetch from 'hooks/useFetch';
-import { MessageResponse } from 'utils/apiResponseShape';
+import { MessageResponse } from 'utils/apiResponseShapes';
 import { HttpErrorCode } from 'utils/enums';
 
 const StyledInput = styled(Input)`

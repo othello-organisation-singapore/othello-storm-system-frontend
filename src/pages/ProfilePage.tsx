@@ -15,7 +15,7 @@ import {
 import { useUserContext } from 'components/UserContext';
 import useFetch from 'hooks/useFetch';
 import useToastPushSubmit from 'hooks/useToastPushSubmit';
-import { MessageResponse } from 'utils/apiResponseShape';
+import { MessageResponse } from 'utils/apiResponseShapes';
 
 const StyledForm = styled(Form)`
   width: 100%;
