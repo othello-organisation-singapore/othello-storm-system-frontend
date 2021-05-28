@@ -8,7 +8,7 @@ import {
 import { parse } from 'cookie';
 import { useHistory } from 'react-router-dom';
 
-import { UserRole } from 'utils/enums';
+import { UserRoles } from 'utils/enums';
 import useFetch from 'hooks/useFetch';
 import useToastPushSubmit from 'hooks/useToastPushSubmit';
 import { LoginResponse, User } from 'utils/apiResponseShapes';
@@ -29,10 +29,10 @@ const UserContext = createContext(null);
 export const useUserContext = (): UserContext => useContext(UserContext);
 
 const getLoggedInUserData = (): LoginResponse => {
-  const { username, displayName, jwt, role = UserRole.Visitor } = parse(
+  const { username, displayName, jwt, role = UserRoles.Visitor } = parse(
     document.cookie
   );
-  return { username, displayName, jwt, role: role as UserRole };
+  return { username, displayName, jwt, role: role as UserRoles };
 };
 
 export function UserContextProvider({ children }: { children: ReactNode }) {
@@ -103,7 +103,7 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
     <UserContext.Provider
       value={{
         user,
-        isLoggedIn: user.role !== UserRole.Visitor,
+        isLoggedIn: user.role !== UserRoles.Visitor,
         logout,
         login,
         isLoading,

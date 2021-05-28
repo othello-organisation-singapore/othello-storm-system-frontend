@@ -1,9 +1,9 @@
-import { UserRole } from 'utils/enums';
+import { UserRoles, TournamentTypes } from 'utils/enums';
 
 export interface User {
   username: string;
   displayName: string;
-  role: UserRole;
+  role: UserRoles;
 }
 
 export interface LoginResponse extends User {
@@ -12,4 +12,18 @@ export interface LoginResponse extends User {
 
 export interface MessageResponse {
   message: string;
+}
+
+export interface TournamentPreview {
+  id: number;
+  name: string;
+  tournamentType: TournamentTypes;
+  country: string;
+  creatorUsername: string;
+  startDate: string;
+  endDate: string;
+}
+
+export interface TournamentsResponse {
+  tournaments: TournamentPreview[];
 }

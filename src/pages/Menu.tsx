@@ -7,7 +7,7 @@ import { MenuOutlined } from '@ant-design/icons';
 
 import { useUserContext } from 'components/UserContext';
 import { useProgressiveContext } from 'components/ProgressiveContext';
-import { ScreenType, UserRole } from 'utils/enums';
+import { ScreenTypes, UserRoles } from 'utils/enums';
 
 const MenuRow = styled.div`
   display: flex;
@@ -50,7 +50,7 @@ const HamburgerMenuWrapper = styled.div`
 function OSSMenu() {
   const { screenType } = useProgressiveContext();
 
-  return screenType === ScreenType.Desktop ? <DesktopMenu /> : <MobileMenu />;
+  return screenType === ScreenTypes.Desktop ? <DesktopMenu /> : <MobileMenu />;
 }
 
 function DesktopMenu() {
@@ -109,7 +109,7 @@ function DesktopMenu() {
       <MenuProfileGroup>
         {isLoggedIn ? (
           <>
-            {user.role === UserRole.Superuser ? (
+            {user.role === UserRoles.Superuser ? (
               <Menu.SubMenu title="Profile">
                 <Menu.Item>
                   <Link to="/profile">Profile</Link>
@@ -197,7 +197,7 @@ function MobileMenu() {
           </Menu.SubMenu>
           {isLoggedIn && (
             <>
-              {user.role === UserRole.Superuser ? (
+              {user.role === UserRoles.Superuser ? (
                 <Menu.SubMenu title="Profile">
                   <Menu.Item>
                     <Link to="/profile">Profile</Link>

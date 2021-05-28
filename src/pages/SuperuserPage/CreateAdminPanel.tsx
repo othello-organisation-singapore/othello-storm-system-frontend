@@ -7,7 +7,7 @@ import { GroupTitle, FormLabel, FormItem } from 'components/common';
 import useToastPushSubmit from 'hooks/useToastPushSubmit';
 import useFetch from 'hooks/useFetch';
 import { MessageResponse } from 'utils/apiResponseShapes';
-import { HttpErrorCode } from 'utils/enums';
+import { HttpErrorCodes } from 'utils/enums';
 
 const StyledInput = styled(Input)`
   margin: 10px 0;
@@ -26,7 +26,7 @@ function CreateAdminPanel() {
   const [formError, setFormError] = useState(false);
 
   const { pushError, pushSuccess } = useToastPushSubmit({
-    [HttpErrorCode.BadRequestError]: 'Username exists',
+    [HttpErrorCodes.BadRequestError]: 'Username exists',
   });
   const { request, isLoading } = useFetch<MessageResponse>();
   const handleSubmit = async () => {

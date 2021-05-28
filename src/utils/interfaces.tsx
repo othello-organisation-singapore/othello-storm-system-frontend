@@ -1,7 +1,7 @@
-import { HttpErrorCode } from 'utils/enums';
+import { HttpErrorCodes } from 'utils/enums';
 
 export interface HttpResponseError {
-  code: HttpErrorCode;
+  code: HttpErrorCodes;
   message: string;
 }
 
