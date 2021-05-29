@@ -4,7 +4,9 @@ import { message } from 'antd';
 
 import { HttpErrorCodes } from 'utils/enums';
 
-function useToastPushSubmit(errorMessageOverride: object = {}) {
+function useToastPushSubmit(
+  errorMessageOverride: { [key in HttpErrorCodes]?: ReactNode } = {}
+) {
   const pushMessage = (content: ReactNode) => {
     message.error(content, 1.5);
   };

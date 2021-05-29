@@ -16,7 +16,7 @@ import { setCookie, removeCookie } from 'utils/cookie';
 
 type LoginCallback = (username: string, password: string) => void;
 
-interface UserContext {
+interface UserContextShape {
   user?: User;
   isLoggedIn: boolean;
   logout: () => void;
@@ -25,8 +25,8 @@ interface UserContext {
   updateCurrentUser: () => void;
 }
 
-const UserContext = createContext(null);
-export const useUserContext = (): UserContext => useContext(UserContext);
+const UserContext = createContext<UserContextShape>(null);
+export const useUserContext = () => useContext(UserContext);
 
 const getLoggedInUserData = (): LoginResponse => {
   const { username, displayName, jwt, role = UserRoles.Visitor } = parse(

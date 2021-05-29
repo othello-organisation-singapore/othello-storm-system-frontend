@@ -9,7 +9,11 @@ import debounce from 'lodash/debounce';
 
 import { ScreenTypes } from 'utils/enums';
 
-const ProgressiveContext = createContext(null);
+interface ProgressiveContextShape {
+  screenType: ScreenTypes;
+}
+
+const ProgressiveContext = createContext<ProgressiveContextShape>(null);
 export const useProgressiveContext = () => useContext(ProgressiveContext);
 
 export function ProgressiveContextProvider({

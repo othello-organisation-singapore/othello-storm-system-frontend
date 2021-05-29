@@ -93,7 +93,7 @@ function CreateAdminPanel() {
         </FormItem>
 
         <Button type="primary" disabled={isLoading} onClick={handleSubmit}>
-          Create New User
+          Submit
         </Button>
       </Form>
     </div>

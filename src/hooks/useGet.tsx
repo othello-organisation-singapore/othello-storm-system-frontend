@@ -22,7 +22,7 @@ function useGet<TResPayload>(
 ) {
   const { request, isLoading } = useFetch<TResPayload>();
   const [refreshKey, setRefreshKey] = useState(0);
-  const [data, setData] = useState({});
+  const [data, setData] = useState<TResPayload>(null);
   const [error, setError] = useState({
     code: HttpErrorCodes.NoError,
     message: '',
@@ -34,7 +34,7 @@ function useGet<TResPayload>(
 
     request(`${path}${query}`, 'GET').then(({ response, error }) => {
       setError(error);
-      if (!controller.signal.aborted && error.code === 0) {
+      if (!controller.signal.aborted && error.code === 0 && response !== '') {
         setData(response);
       }
       return () => controller.abort();
