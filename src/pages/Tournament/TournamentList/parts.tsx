@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Table, Button } from 'antd';
+import { Table, Button, Modal } from 'antd';
 
 import { PageTitle, Row } from 'components/common';
 import { useUserContext } from 'components/UserContext';
 import { TournamentPreview } from 'utils/apiResponseShapes';
 import { UserRoles } from 'utils/enums';
 import { TournamentTypeDisplays } from './displays';
+import CreateTournamentDialog from './CreateTournamentDialog';
 
 interface TournamentListPageTitleProps {
   title: string;
+  onCreateNewTournament: () => void;
 }
 
 const StyledRow = styled(Row)`
@@ -23,14 +25,25 @@ const StyledButton = styled(Button)`
 
 export function TournamentListPageTitle({
   title,
+  onCreateNewTournament,
 }: TournamentListPageTitleProps) {
   const { user } = useUserContext();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <StyledRow>
       <PageTitle>{title}</PageTitle>
       {user.role !== UserRoles.Visitor && (
-        <StyledButton type="primary">Test</StyledButton>
+        <>
+          <StyledButton type="primary" onClick={() => setIsOpen(true)}>
+            Create
+          </StyledButton>
+          <CreateTournamentDialog
+            handleClose={() => setIsOpen(false)}
+            isOpen={isOpen}
+            onCreate={onCreateNewTournament}
+          />
+        </>
       )}
     </StyledRow>
   );

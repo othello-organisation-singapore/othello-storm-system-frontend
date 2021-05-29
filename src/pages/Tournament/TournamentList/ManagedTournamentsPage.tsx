@@ -11,13 +11,16 @@ import {
 } from './parts';
 
 function ManagedTournamentPage() {
-  const { data } = useGet<TournamentsResponse>(
+  const { data, refresh } = useGet<TournamentsResponse>(
     '/api/tournaments/managed_by_me/'
   );
   const { screenType } = useProgressiveContext();
   return (
     <>
-      <TournamentListPageTitle title="Tournaments Managed by Me" />
+      <TournamentListPageTitle
+        title="Tournaments Managed by Me"
+        onCreateNewTournament={refresh}
+      />
       {data &&
         (screenType === ScreenTypes.Desktop ? (
           <DesktopTournamentListTable tournaments={data.tournaments} />
