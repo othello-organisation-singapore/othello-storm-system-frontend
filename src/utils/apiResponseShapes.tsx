@@ -27,3 +27,18 @@ export interface TournamentPreview {
 export interface TournamentsResponse {
   tournaments: TournamentPreview[];
 }
+
+export interface TournamentCreator {
+  username: string;
+  displayName: string;
+}
+
+export interface TournamentDetails {
+  id: number;
+  name: string;
+  tournamentType: TournamentTypes;
+  country: string;
+  startDate: string;
+  endDate: string;
+  creator: TournamentCreator;
+}

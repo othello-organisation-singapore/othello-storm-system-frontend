@@ -9,6 +9,7 @@ import { TournamentPreview } from 'utils/apiResponseShapes';
 import { UserRoles } from 'utils/enums';
 import { TournamentTypeDisplays } from './displays';
 import CreateTournamentDialog from './CreateTournamentDialog';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
 interface TournamentListPageTitleProps {
   title: string;
@@ -27,13 +28,13 @@ export function TournamentListPageTitle({
   title,
   onCreateNewTournament,
 }: TournamentListPageTitleProps) {
-  const { user } = useUserContext();
+  const { isLoggedIn } = useUserContext();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <StyledRow>
       <PageTitle>{title}</PageTitle>
-      {user.role !== UserRoles.Visitor && (
+      {isLoggedIn && (
         <>
           <StyledButton type="primary" onClick={() => setIsOpen(true)}>
             Create
@@ -89,6 +90,8 @@ const desktopTableColumns = [
 export function DesktopTournamentListTable({
   tournaments,
 }: TournamentListTableProps) {
+  const { push } = useHistory();
+  const { url } = useRouteMatch();
   return (
     <Table
       dataSource={tournaments.map(t => ({
@@ -98,6 +101,13 @@ export function DesktopTournamentListTable({
       }))}
       columns={desktopTableColumns}
       scroll={{ x: true }}
+      onRow={record => ({
+        onClick: () =>
+          push(
+            url.replace(/tournaments\/.+$/, `tournaments/detail/${record.id}`)
+          ),
+        style: { cursor: 'pointer' },
+      })}
     />
   );
 }
@@ -118,11 +128,20 @@ const mobileTableColumns = [
 export function MobileTournamentListTable({
   tournaments,
 }: TournamentListTableProps) {
+  const { push } = useHistory();
+  const { url } = useRouteMatch();
   return (
     <Table
       dataSource={tournaments.map(t => ({ ...t, key: t.id }))}
       columns={mobileTableColumns}
       scroll={{ x: true }}
+      onRow={record => ({
+        onClick: () =>
+          push(
+            url.replace(/tournaments\/.+$/, `tournaments/detail/${record.id}`)
+          ),
+        style: { cursor: 'pointer' },
+      })}
     />
   );
 }
