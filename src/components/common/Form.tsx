@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import { Form } from 'antd';
+import { Form, Input, Typography } from 'antd';
+const { Text } = Typography;
 
 export const FormItem = styled(Form.Item)`
   align-items: center;
@@ -12,3 +13,10 @@ export const FormItem = styled(Form.Item)`
     justify-content: flex-start;
   }
 `;
+
+export const StyledInput = styled(Input)`
+  margin: 10px 0;
+  width: 300px;
+`;
+
+export const FormText = styled(Text)``;

@@ -3,16 +3,16 @@ import styled from 'styled-components';
 
 import { Input, Button, Form } from 'antd';
 
-import { GroupTitle, FormLabel, FormItem } from 'components/common';
+import {
+  GroupTitle,
+  FormLabel,
+  FormItem,
+  StyledInput,
+} from 'components/common';
 import useToastPushSubmit from 'hooks/useToastPushSubmit';
 import useFetch from 'hooks/useFetch';
 import { MessageResponse } from 'utils/apiResponseShapes';
 import { HttpErrorCodes } from 'utils/enums';
-
-const StyledInput = styled(Input)`
-  margin: 10px 0;
-  width: 300px;
-`;
 
 const StyledPasswordInput = styled(Input.Password)`
   margin: 10px 0 20px;
