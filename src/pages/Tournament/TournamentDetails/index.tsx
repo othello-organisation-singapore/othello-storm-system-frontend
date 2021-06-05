@@ -1,17 +1,18 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
 
 import { Tabs } from 'antd';
 import { PageTitle, PageWrapper, Row } from 'components/common';
 import { useUserContext } from 'components/UserContext';
 import useGet from 'hooks/useGet';
+import useRefreshKey from 'hooks/useRefreshKey';
+import { UserRoles } from 'utils/enums';
 import { TournamentDetails } from 'utils/apiResponseShapes';
 import TournamentInfoProvider from './TournamentInfoContext';
+import TournamentAdminProvider from './TournamentAdminContext';
+import AdministratorsPanel from './AdministratorsPanel';
 import BasicInfoPanel from './BasicInfoPanel';
 import BasicInfoEditPanel from './BasicInfoEditPanel';
-import { UserRoles } from '../../../utils/enums';
-import useRefreshKey from '../../../hooks/useRefreshKey';
 
 const { TabPane } = Tabs;
 
@@ -28,12 +29,14 @@ function TournamentDetailsPage() {
   return (
     data && (
       <TournamentInfoProvider tournament={data} refresh={refresh}>
-        <PageWrapper>
-          <Row>
-            <PageTitle>{data.name}</PageTitle>
-          </Row>
-          <TournamentManagementTabs tournament={data} />
-        </PageWrapper>
+        <TournamentAdminProvider tournament={data}>
+          <PageWrapper>
+            <Row>
+              <PageTitle>{data.name}</PageTitle>
+            </Row>
+            <TournamentManagementTabs tournament={data} />
+          </PageWrapper>
+        </TournamentAdminProvider>
       </TournamentInfoProvider>
     )
   );
@@ -62,6 +65,11 @@ function TournamentManagementTabs({
           <BasicInfoPanel />
         )}
       </TabPane>
+      {hasMainEditPermission && (
+        <TabPane tab="Administrators" key="2">
+          <AdministratorsPanel />
+        </TabPane>
+      )}
     </Tabs>
   );
 }

@@ -92,7 +92,7 @@ function CreateAdminPanel() {
           />
         </FormItem>
 
-        <Button type="primary" disabled={isLoading} onClick={handleSubmit}>
+        <Button type="primary" loading={isLoading} onClick={handleSubmit}>
           Submit
         </Button>
       </Form>

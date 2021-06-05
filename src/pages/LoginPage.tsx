@@ -55,7 +55,7 @@ function LoginPage() {
         <Button
           type="primary"
           onClick={() => login(username, password)}
-          disabled={isLoading}
+          loading={isLoading}
         >
           Login
         </Button>

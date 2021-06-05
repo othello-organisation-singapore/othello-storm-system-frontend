@@ -88,7 +88,7 @@ function BasicInfoEditPanel() {
       <FormItem label={<FormLabel>Creator Name</FormLabel>}>
         <FormText>{tournament.creator.displayName}</FormText>
       </FormItem>
-      <StyledButton type="primary" disabled={isLoading} onClick={handleSubmit}>
+      <StyledButton type="primary" loading={isLoading} onClick={handleSubmit}>
         Save Changes
       </StyledButton>
     </Form>

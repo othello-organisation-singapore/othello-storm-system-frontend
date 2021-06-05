@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useProgressiveContext } from 'components/ProgressiveContext';
 import useGet from 'hooks/useGet';
-import { TournamentsResponse } from 'utils/apiResponseShapes';
+import { TournamentListResponse } from 'utils/apiResponseShapes';
 import { ScreenTypes } from 'utils/enums';
 import {
   DesktopTournamentListTable,
@@ -11,7 +11,7 @@ import {
 } from './parts';
 
 function AllTournamentsPage() {
-  const { data, refresh } = useGet<TournamentsResponse>('/api/tournaments/');
+  const { data, refresh } = useGet<TournamentListResponse>('/api/tournaments/');
   const { screenType } = useProgressiveContext();
   return (
     <>
@@ -21,9 +21,13 @@ function AllTournamentsPage() {
       />
       {data &&
         (screenType === ScreenTypes.Desktop ? (
-          <DesktopTournamentListTable tournaments={data.tournaments} />
+          <DesktopTournamentListTable
+            tournaments={data.tournaments.slice().reverse()}
+          />
         ) : (
-          <MobileTournamentListTable tournaments={data.tournaments} />
+          <MobileTournamentListTable
+            tournaments={data.tournaments.slice().reverse()}
+          />
         ))}
     </>
   );

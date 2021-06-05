@@ -9,3 +9,8 @@ export interface HttpResponse<TResPayload> {
   success: '' | TResPayload;
   error: HttpResponseError;
 }
+
+export interface ClosableComponentProps {
+  isOpen: boolean;
+  handleClose: () => void;
+}

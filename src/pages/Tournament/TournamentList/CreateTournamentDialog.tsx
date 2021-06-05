@@ -64,7 +64,7 @@ function CreateTournamentDialog({
       onCancel={handleClose}
       footer={[
         <Button onClick={handleClose}>Cancel</Button>,
-        <Button type="primary" onClick={handleSubmit} disabled={isLoading}>
+        <Button type="primary" onClick={handleSubmit} loading={isLoading}>
           Submit
         </Button>,
       ]}

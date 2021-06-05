@@ -136,7 +136,7 @@ function ProfilePage() {
           <Button
             type="primary"
             onClick={() => handleSubmit()}
-            disabled={isLoading}
+            loading={isLoading}
           >
             Save Changes
           </Button>

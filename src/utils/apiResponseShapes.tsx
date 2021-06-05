@@ -24,7 +24,7 @@ export interface TournamentPreview {
   endDate: string;
 }
 
-export interface TournamentsResponse {
+export interface TournamentListResponse {
   tournaments: TournamentPreview[];
 }
 
@@ -41,4 +41,12 @@ export interface TournamentDetails {
   startDate: string;
   endDate: string;
   creator: TournamentCreator;
+}
+
+export interface TournamentAdminListResponse {
+  admins: User[];
+}
+
+export interface TournamentPotentialAdminListResponse {
+  potentialAdmins: User[];
 }
