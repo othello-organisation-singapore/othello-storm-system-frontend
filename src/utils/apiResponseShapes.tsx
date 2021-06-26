@@ -50,3 +50,25 @@ export interface TournamentAdminListResponse {
 export interface TournamentPotentialAdminListResponse {
   potentialAdmins: User[];
 }
+
+export interface JoueursPlayer {
+  joueursId: string;
+  firstName: string;
+  lastName: string;
+  country: string;
+  rating: string;
+}
+
+export interface Player extends JoueursPlayer {
+  id: number;
+}
+
+export interface TournamentPlayerListResponse {
+  tournamentId: number;
+  players: Player[];
+}
+
+export interface TournamentJoueursPlayerListResponse {
+  tournamentId: number;
+  joueursPlayers: JoueursPlayer[];
+}

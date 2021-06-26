@@ -32,6 +32,12 @@ function CreateTournamentDialog({
   const [country, setCountry] = useState('');
   const [type, setType] = useState<SelectValue>(TournamentTypes.SwissPairing);
   const [range, setRange] = useState<[Moment, Moment]>([moment(), moment()]);
+  const resetState = () => {
+    setName('');
+    setCountry('');
+    setType(TournamentTypes.SwissPairing);
+    setRange([moment(), moment()]);
+  };
 
   const { request, isLoading } = useFetch<MessageResponse>();
   const { pushError, pushSuccess } = useToastPushSubmit();
@@ -48,10 +54,6 @@ function CreateTournamentDialog({
       pushError(error.code);
     } else {
       pushSuccess('Tournament Created');
-      setName('');
-      setCountry('');
-      setType(TournamentTypes.SwissPairing);
-      setRange([moment(), moment()]);
       onCreate();
       handleClose();
     }
@@ -62,6 +64,7 @@ function CreateTournamentDialog({
       title="Create New Tournament"
       visible={isOpen}
       onCancel={handleClose}
+      afterClose={resetState}
       footer={[
         <Button onClick={handleClose}>Cancel</Button>,
         <Button type="primary" onClick={handleSubmit} loading={isLoading}>

@@ -12,7 +12,6 @@ interface TournamentAdminContextShape {
   admins: User[];
   potentialAdmins: User[];
   refresh: () => void;
-  isLoading: boolean;
 }
 
 const TournamentAdminContext = createContext<TournamentAdminContextShape>(null);
@@ -31,7 +30,6 @@ function TournamentAdminProvider({
   const {
     data: adminData,
     refresh: refreshAdmin,
-    isLoading: isAdminLoading,
   } = useGet<TournamentAdminListResponse>(
     `/api/tournaments/${tournament.id}/admins/`
   );
@@ -39,7 +37,6 @@ function TournamentAdminProvider({
   const {
     data: potentialAdminData,
     refresh: refreshPotentialAdmin,
-    isLoading: isPotentialAdminLoading,
   } = useGet<TournamentPotentialAdminListResponse>(
     `/api/tournaments/${tournament.id}/potential_admins/`
   );
@@ -55,7 +52,6 @@ function TournamentAdminProvider({
             refreshAdmin();
             refreshPotentialAdmin();
           },
-          isLoading: isAdminLoading || isPotentialAdminLoading,
         }}
       >
         {children}

@@ -9,10 +9,15 @@ import useRefreshKey from 'hooks/useRefreshKey';
 import { UserRoles } from 'utils/enums';
 import { TournamentDetails } from 'utils/apiResponseShapes';
 import TournamentInfoProvider from './TournamentInfoContext';
-import TournamentAdminProvider from './TournamentAdminContext';
+import TournamentAdminProvider, {
+  useTournamentAdminContext,
+} from './TournamentAdminContext';
+import TournamentPlayerProvider from './TournamentPlayerContext';
 import AdministratorsPanel from './AdministratorsPanel';
 import BasicInfoPanel from './BasicInfoPanel';
 import BasicInfoEditPanel from './BasicInfoEditPanel';
+import PlayersPanel from './PlayersPanel';
+import PlayersEditPanel from './PlayersEditPanel';
 
 const { TabPane } = Tabs;
 
@@ -49,13 +54,19 @@ interface TournamentManagementTabsProps {
 function TournamentManagementTabs({
   tournament,
 }: TournamentManagementTabsProps) {
-  // Unmount inactive tab
   const { refreshKey, refresh } = useRefreshKey();
 
   const { user } = useUserContext();
+  const { admins } = useTournamentAdminContext();
+
   const hasMainEditPermission =
     user.role === UserRoles.Superuser ||
     user.username === tournament.creator.username;
+
+  const hasAdminPermission =
+    hasMainEditPermission ||
+    admins.filter(admin => admin.username === user.username).length > 0;
+
   return (
     <Tabs defaultActiveKey="1" onChange={refresh}>
       <TabPane tab="Basic Info" key="1">
@@ -70,6 +81,15 @@ function TournamentManagementTabs({
           <AdministratorsPanel />
         </TabPane>
       )}
+      <TabPane tab="Players" key="3">
+        <TournamentPlayerProvider tournament={tournament}>
+          {hasAdminPermission ? (
+            <PlayersEditPanel key={refreshKey} />
+          ) : (
+            <PlayersPanel />
+          )}
+        </TournamentPlayerProvider>
+      </TabPane>
     </Tabs>
   );
 }
