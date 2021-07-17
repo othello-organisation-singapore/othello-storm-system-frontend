@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import styled from 'styled-components';
 
 import { Button, Modal, Select, Form, Input } from 'antd';
@@ -6,7 +6,7 @@ import { Button, Modal, Select, Form, Input } from 'antd';
 import { FormItem, FormLabel } from 'components/common';
 import useFetch from 'hooks/useFetch';
 import useToastPushSubmit from 'hooks/useToastPushSubmit';
-import { MessageResponse } from 'utils/apiResponseShapes';
+import { MessageResponse, Player } from 'utils/apiResponseShapes';
 import { ClosableComponentProps } from 'utils/interfaces';
 import { useTournamentInfoContext } from './TournamentInfoContext';
 import { useTournamentAdminContext } from './TournamentAdminContext';
@@ -308,5 +308,51 @@ function AddNewPlayerDialog({
         </FormItem>
       </Form>
     </Modal>
+  );
+}
+
+interface PlayerButtonProps {
+  onClick?: () => void;
+  disabled?: boolean;
+  type?: 'default' | 'primary';
+  player: Player;
+}
+
+const StyledPlayerButton = styled(Button)`
+  max-width: 250px;
+
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:focus,
+  &[disabled]:active {
+    background-color: white;
+    color: rgba(0, 0, 0, 0.85);
+  }
+`;
+
+const PlayerNameDiv = styled.div`
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+export function PlayerButton({
+  onClick = () => {},
+  player,
+  disabled = false,
+  type = 'default',
+}: PlayerButtonProps) {
+  return (
+    <StyledPlayerButton
+      onClick={onClick}
+      disabled={disabled}
+      type={type}
+      key={player.id}
+    >
+      <PlayerNameDiv>
+        {player.lastName} {player.firstName}
+      </PlayerNameDiv>
+    </StyledPlayerButton>
   );
 }

@@ -18,6 +18,9 @@ import BasicInfoPanel from './BasicInfoPanel';
 import BasicInfoEditPanel from './BasicInfoEditPanel';
 import PlayersPanel from './PlayersPanel';
 import PlayersEditPanel from './PlayersEditPanel';
+import MatchesPanel from './MatchesPanel';
+import MatchesEditPanel from './MatchesEditPanel';
+import TournamentRoundProvider from './TournamentRoundContext';
 
 const { TabPane } = Tabs;
 
@@ -68,29 +71,38 @@ function TournamentManagementTabs({
     admins.filter(admin => admin.username === user.username).length > 0;
 
   return (
-    <Tabs defaultActiveKey="1" onChange={refresh}>
-      <TabPane tab="Basic Info" key="1">
-        {hasMainEditPermission ? (
-          <BasicInfoEditPanel key={refreshKey} />
-        ) : (
-          <BasicInfoPanel />
-        )}
-      </TabPane>
-      {hasMainEditPermission && (
-        <TabPane tab="Administrators" key="2">
-          <AdministratorsPanel />
+    <TournamentPlayerProvider tournament={tournament}>
+      <Tabs defaultActiveKey="1" onChange={refresh} type="card">
+        <TabPane tab="Basic Info" key="1">
+          {hasMainEditPermission ? (
+            <BasicInfoEditPanel key={refreshKey} />
+          ) : (
+            <BasicInfoPanel />
+          )}
         </TabPane>
-      )}
-      <TabPane tab="Players" key="3">
-        <TournamentPlayerProvider tournament={tournament}>
+        {hasMainEditPermission && (
+          <TabPane tab="Administrators" key="2">
+            <AdministratorsPanel />
+          </TabPane>
+        )}
+        <TabPane tab="Players" key="3">
           {hasAdminPermission ? (
             <PlayersEditPanel key={refreshKey} />
           ) : (
             <PlayersPanel />
           )}
-        </TournamentPlayerProvider>
-      </TabPane>
-    </Tabs>
+        </TabPane>
+        <TabPane tab="Matches" key="4">
+          <TournamentRoundProvider tournament={tournament}>
+            {hasAdminPermission ? (
+              <MatchesEditPanel key={refreshKey} />
+            ) : (
+              <MatchesPanel />
+            )}
+          </TournamentRoundProvider>
+        </TabPane>
+      </Tabs>
+    </TournamentPlayerProvider>
   );
 }
 

@@ -1,4 +1,4 @@
-import { UserRoles, TournamentTypes } from 'utils/enums';
+import { UserRoles, TournamentTypes, RoundTypes } from 'utils/enums';
 
 export interface User {
   username: string;
@@ -71,4 +71,18 @@ export interface TournamentPlayerListResponse {
 export interface TournamentJoueursPlayerListResponse {
   tournamentId: number;
   joueursPlayers: JoueursPlayer[];
+}
+
+export interface RoundPreview {
+  id: number;
+  name: string;
+}
+
+export interface TournamentRoundsResponse {
+  tournamentId: number;
+  rounds: RoundPreview[];
+}
+
+export interface RoundDetails extends RoundPreview {
+  type: RoundTypes;
 }
