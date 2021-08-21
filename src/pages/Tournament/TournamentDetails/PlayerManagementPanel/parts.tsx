@@ -1,116 +1,15 @@
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Button, Modal, Select, Form, Input } from 'antd';
+import { Button, Form, Input, Modal, Select } from 'antd';
 
 import { FormItem, FormLabel } from 'components/common';
 import useFetch from 'hooks/useFetch';
 import useToastPushSubmit from 'hooks/useToastPushSubmit';
-import { MessageResponse, Player } from 'utils/apiResponseShapes';
 import { ClosableComponentProps } from 'utils/interfaces';
-import { useTournamentInfoContext } from './TournamentInfoContext';
-import { useTournamentAdminContext } from './TournamentAdminContext';
-import { useTournamentPlayerContext } from './TournamentPlayerContext';
-
-interface AddNewAdminButtonProps {
-  onSuccess: () => void;
-}
-export function AddNewAdminButton({ onSuccess }: AddNewAdminButtonProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
-    <>
-      <Button type="primary" onClick={() => setIsOpen(true)}>
-        Add New Admin
-      </Button>
-      <AddNewAdminDialog
-        onSuccess={onSuccess}
-        isOpen={isOpen}
-        handleClose={() => setIsOpen(false)}
-      />
-    </>
-  );
-}
-
-interface AddNewAdminDialogProps extends ClosableComponentProps {
-  onSuccess: () => void;
-}
-
-const StyledSelect = styled(Select)`
-  width: 300px;
-`;
-
-function AddNewAdminDialog({
-  isOpen,
-  handleClose,
-  onSuccess,
-}: AddNewAdminDialogProps) {
-  const { tournament } = useTournamentInfoContext();
-  const { potentialAdmins } = useTournamentAdminContext();
-  const { request, isLoading } = useFetch<MessageResponse>();
-  const { pushError, pushSuccess } = useToastPushSubmit();
-
-  const [keyword, setKeyword] = useState('');
-  const [selectedUsername, setSelectedUsername] = useState(null);
-  const onClose = () => {
-    handleClose();
-    setKeyword('');
-    setSelectedUsername(null);
-  };
-
-  const handleSubmit = async () => {
-    const { response, error } = await request(
-      `/api/tournaments/${tournament.id}/admins/`,
-      'POST',
-      {
-        username: selectedUsername,
-      }
-    );
-    if (response === '') {
-      pushError(error.code);
-    } else {
-      pushSuccess('Admin added');
-      onSuccess();
-      onClose();
-    }
-  };
-
-  return (
-    <Modal
-      title="Add New Admin"
-      visible={isOpen}
-      onCancel={onClose}
-      footer={[
-        <Button onClick={onClose}>Cancel</Button>,
-        <Button
-          type="primary"
-          onClick={handleSubmit}
-          loading={isLoading}
-          disabled={selectedUsername === null}
-        >
-          Submit
-        </Button>,
-      ]}
-    >
-      <StyledSelect
-        value={selectedUsername}
-        onChange={setSelectedUsername}
-        showSearch
-        onSearch={val => setKeyword(val.toLowerCase())}
-        filterOption={() => true}
-      >
-        {potentialAdmins
-          .filter(({ displayName }) =>
-            displayName.toLowerCase().includes(keyword)
-          )
-          .map(({ username, displayName }) => (
-            <Select.Option key={username} value={username}>
-              {displayName}
-            </Select.Option>
-          ))}
-      </StyledSelect>
-    </Modal>
-  );
-}
+import { MessageResponse } from 'utils/apiResponseShapes';
+import { useTournamentInfoContext } from '../TournamentInfoContext';
+import { useTournamentPlayerContext } from '../TournamentPlayerContext';
 
 interface AddPlayerButtonProps {
   onSuccess: () => void;
@@ -137,6 +36,10 @@ export function AddPlayerFromJoueursButton({
 interface AddPlayerDialogProps extends ClosableComponentProps {
   onSuccess: () => void;
 }
+
+const StyledSelect = styled(Select)`
+  width: 300px;
+`;
 
 function AddPlayerFromJoueursDialog({
   isOpen,
@@ -308,51 +211,5 @@ function AddNewPlayerDialog({
         </FormItem>
       </Form>
     </Modal>
-  );
-}
-
-interface PlayerButtonProps {
-  onClick?: () => void;
-  disabled?: boolean;
-  type?: 'default' | 'primary';
-  player: Player;
-}
-
-const StyledPlayerButton = styled(Button)`
-  max-width: 250px;
-
-  &[disabled],
-  &[disabled]:hover,
-  &[disabled]:focus,
-  &[disabled]:active {
-    background-color: white;
-    color: rgba(0, 0, 0, 0.85);
-  }
-`;
-
-const PlayerNameDiv = styled.div`
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
-
-export function PlayerButton({
-  onClick = () => {},
-  player,
-  disabled = false,
-  type = 'default',
-}: PlayerButtonProps) {
-  return (
-    <StyledPlayerButton
-      onClick={onClick}
-      disabled={disabled}
-      type={type}
-      key={player.id}
-    >
-      <PlayerNameDiv>
-        {player.lastName} {player.firstName}
-      </PlayerNameDiv>
-    </StyledPlayerButton>
   );
 }

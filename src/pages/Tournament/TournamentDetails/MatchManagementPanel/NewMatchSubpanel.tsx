@@ -14,10 +14,10 @@ import useToastPushSubmit from 'hooks/useToastPushSubmit';
 import { HttpErrorCodes, RoundTypes } from 'utils/enums';
 import { HttpResponseError } from 'utils/interfaces';
 import { MessageResponse, Player } from 'utils/apiResponseShapes';
-import { useTournamentPlayerContext } from './TournamentPlayerContext';
 import { PlayerButton } from './parts';
-import { useTournamentRoundContext } from './TournamentRoundContext';
-import { useTournamentInfoContext } from './TournamentInfoContext';
+import { useTournamentPlayerContext } from '../TournamentPlayerContext';
+import { useTournamentRoundContext } from '../TournamentRoundContext';
+import { useTournamentInfoContext } from '../TournamentInfoContext';
 
 const PlayerWrapper = styled.div`
   margin-top: 15px;

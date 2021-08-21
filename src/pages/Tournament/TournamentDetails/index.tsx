@@ -13,14 +13,11 @@ import TournamentAdminProvider, {
   useTournamentAdminContext,
 } from './TournamentAdminContext';
 import TournamentPlayerProvider from './TournamentPlayerContext';
-import AdministratorsPanel from './AdministratorsPanel';
-import BasicInfoPanel from './BasicInfoPanel';
-import BasicInfoEditPanel from './BasicInfoEditPanel';
-import PlayersPanel from './PlayersPanel';
-import PlayersEditPanel from './PlayersEditPanel';
-import MatchesPanel from './MatchesPanel';
-import MatchesEditPanel from './MatchesEditPanel';
 import TournamentRoundProvider from './TournamentRoundContext';
+import { AdminEditPanel } from './AdminManagementPanel';
+import { BasicInfoPanel, BasicInfoEditPanel } from './BasicInfoPanel';
+import { PlayersPanel, PlayersEditPanel } from './PlayerManagementPanel';
+import { MatchesPanel, MatchesEditPanel } from './MatchManagementPanel';
 
 const { TabPane } = Tabs;
 
@@ -82,7 +79,7 @@ function TournamentManagementTabs({
         </TabPane>
         {hasMainEditPermission && (
           <TabPane tab="Administrators" key="2">
-            <AdministratorsPanel />
+            <AdminEditPanel />
           </TabPane>
         )}
         <TabPane tab="Players" key="3">

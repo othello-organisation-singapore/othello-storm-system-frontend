@@ -6,7 +6,7 @@ import { UserOutlined } from '@ant-design/icons';
 
 import { Row } from 'components/common';
 import { Player } from 'utils/apiResponseShapes';
-import { useTournamentPlayerContext } from './TournamentPlayerContext';
+import { useTournamentPlayerContext } from '../TournamentPlayerContext';
 
 const StyledList = styled(List)`
   max-width: 500px;

@@ -5,8 +5,8 @@ import sortBy from 'lodash/sortBy';
 import { Tabs } from 'antd';
 
 import useRefreshKey from 'hooks/useRefreshKey';
-import { useTournamentRoundContext } from './TournamentRoundContext';
 import NewMatchSubpanel from './NewMatchSubpanel';
+import { useTournamentRoundContext } from '../TournamentRoundContext';
 
 const { TabPane } = Tabs;
 

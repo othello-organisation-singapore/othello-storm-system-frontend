@@ -1,10 +1,9 @@
 import React from 'react';
-
 import { Form } from 'antd';
 
-import { FormLabel, FormItem, FormText } from 'components/common';
-import { TournamentTypeDisplays } from './displays';
-import { useTournamentInfoContext } from './TournamentInfoContext';
+import { FormItem, FormLabel, FormText } from 'components/common';
+import { useTournamentInfoContext } from '../TournamentInfoContext';
+import { TournamentTypeDisplays } from '../displays';
 
 function BasicInfoPanel() {
   const { tournament } = useTournamentInfoContext();
