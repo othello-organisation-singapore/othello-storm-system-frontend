@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import moment, { Moment } from 'moment';
 import styled from 'styled-components';
 import useDeepCompareEffect from 'use-deep-compare-effect';
@@ -12,6 +13,7 @@ import { MessageResponse } from 'utils/apiResponseShapes';
 import { DATE_FORMAT } from 'utils/constants';
 import { useTournamentInfoContext } from '../TournamentInfoContext';
 import { TournamentTypeDisplays } from '../displays';
+import { DeleteTournamentButton } from './parts';
 
 const StyledRangePicker = styled(DatePicker.RangePicker)`
   width: 300px;
@@ -23,6 +25,7 @@ const StyledButton = styled(Button)`
 `;
 
 function BasicInfoEditPanel() {
+  const { push } = useHistory();
   const { tournament, refresh } = useTournamentInfoContext();
   const [name, setName] = useState(tournament.name);
   const [country, setCountry] = useState(tournament.country);
@@ -91,6 +94,7 @@ function BasicInfoEditPanel() {
       <StyledButton type="primary" loading={isLoading} onClick={handleSubmit}>
         Save Changes
       </StyledButton>
+      <DeleteTournamentButton onSuccess={() => push('/tournaments/all')} />
     </Form>
   );
 }
