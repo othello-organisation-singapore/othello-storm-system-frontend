@@ -86,3 +86,33 @@ export interface TournamentRoundsResponse {
 export interface RoundDetails extends RoundPreview {
   type: RoundTypes;
 }
+
+export interface RoundDetailsResponse {
+  tournamentId: number;
+  round: RoundDetails;
+}
+
+export interface MatchDetails {
+  id: number;
+  blackPlayerId: number;
+  whitePlayerId: number;
+  blackScore: number;
+  whiteScore: number;
+}
+
+export interface RoundMatchesResponse {
+  roundId: number;
+  matches: MatchDetails[];
+}
+
+export interface PlayerStanding {
+  playerId: number;
+  majorScore: number;
+  minorScore: number;
+  matchHistory: MatchDetails[];
+}
+
+export interface StandingsResponse {
+  tournamentId: number;
+  standings: PlayerStanding[];
+}
