@@ -11,7 +11,7 @@ import {
 } from './parts';
 
 function ManagedTournamentPage() {
-  const { data, refresh } = useGet<TournamentListResponse>(
+  const { data, refresh, isLoading } = useGet<TournamentListResponse>(
     '/api/tournaments/managed_by_me/'
   );
   const { screenType } = useProgressiveContext();
@@ -22,6 +22,7 @@ function ManagedTournamentPage() {
         onCreateNewTournament={refresh}
       />
       {data &&
+        !isLoading &&
         (screenType === ScreenTypes.Desktop ? (
           <DesktopTournamentListTable
             tournaments={data.tournaments.slice().reverse()}

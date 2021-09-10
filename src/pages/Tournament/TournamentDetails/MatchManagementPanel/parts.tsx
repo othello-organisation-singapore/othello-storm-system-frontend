@@ -207,6 +207,29 @@ export function MatchEditDisplay({
   );
 }
 
+interface MatchInfoDisplayProps {
+  match: MatchDetails;
+}
+
+export function MatchInfoDisplay({ match }: MatchInfoDisplayProps) {
+  return (
+    <PlayerBoxPair>
+      <div>
+        <PlayerBox
+          playerId={match.blackPlayerId}
+          score={match.blackScore}
+          color={PlayerColor.Black}
+        />
+        <PlayerBox
+          playerId={match.whitePlayerId}
+          score={match.whiteScore}
+          color={PlayerColor.White}
+        />
+      </div>
+    </PlayerBoxPair>
+  );
+}
+
 interface StandingsProps {
   standings: PlayerStanding[];
 }

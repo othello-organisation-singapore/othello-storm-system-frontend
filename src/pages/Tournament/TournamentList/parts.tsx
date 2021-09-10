@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import sortedUniqBy from 'lodash/sortedUniqBy';
 
-import { Table, Button, Modal } from 'antd';
+import { Table, Button } from 'antd';
 
 import { PageTitle, Row } from 'components/common';
 import { useUserContext } from 'components/UserContext';
 import { TournamentPreview } from 'utils/apiResponseShapes';
-import { UserRoles } from 'utils/enums';
 import { TournamentTypeDisplays } from './displays';
 import CreateTournamentDialog from './CreateTournamentDialog';
 import { useHistory, useRouteMatch } from 'react-router-dom';
@@ -94,7 +94,7 @@ export function DesktopTournamentListTable({
   const { url } = useRouteMatch();
   return (
     <Table
-      dataSource={tournaments.map(t => ({
+      dataSource={sortedUniqBy(tournaments, t => -t.id).map(t => ({
         ...t,
         key: t.id,
         tournamentType: TournamentTypeDisplays[t.tournamentType],

@@ -11,7 +11,9 @@ import {
 } from './parts';
 
 function AllTournamentsPage() {
-  const { data, refresh } = useGet<TournamentListResponse>('/api/tournaments/');
+  const { data, refresh, isLoading } = useGet<TournamentListResponse>(
+    '/api/tournaments/'
+  );
   const { screenType } = useProgressiveContext();
   return (
     <>
@@ -20,6 +22,7 @@ function AllTournamentsPage() {
         onCreateNewTournament={refresh}
       />
       {data &&
+        !isLoading &&
         (screenType === ScreenTypes.Desktop ? (
           <DesktopTournamentListTable
             tournaments={data.tournaments.slice().reverse()}

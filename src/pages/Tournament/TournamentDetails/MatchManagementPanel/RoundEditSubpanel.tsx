@@ -14,10 +14,10 @@ import {
   RoundMatchesResponse,
   StandingsResponse,
 } from 'utils/apiResponseShapes';
+import { RoundTypes } from 'utils/enums';
 import { RoundTypeDisplays } from './displays';
 import { useTournamentInfoContext } from '../TournamentInfoContext';
 import { DeleteRoundButton, MatchEditDisplay, Standings } from './parts';
-import { RoundTypes } from '../../../../utils/enums';
 
 interface RoundEditSubpanelProps {
   roundId: number;
