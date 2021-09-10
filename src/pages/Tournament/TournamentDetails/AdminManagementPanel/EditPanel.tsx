@@ -52,33 +52,35 @@ function AdministratorsPanel() {
   };
 
   return (
-    <>
-      <StyledRow>
-        <AddNewAdminButton onSuccess={refresh} />
-      </StyledRow>
-      {admins.length > 0 && (
-        <StyledList
-          dataSource={admins}
-          renderItem={(item: User) => (
-            <StyledListItem>
-              <div>
-                <StyledAvatar icon={<UserOutlined />} />
-                {item.displayName}
-              </div>
-              <Button
-                danger
-                type="text"
-                disabled={isLoading}
-                onClick={() => handleRemoveAdmin(item.username)}
-              >
-                <DeleteOutlined />
-              </Button>
-            </StyledListItem>
-          )}
-          header="Tournament's Admins"
-        />
-      )}
-    </>
+    admins && (
+      <>
+        <StyledRow>
+          <AddNewAdminButton onSuccess={refresh} />
+        </StyledRow>
+        {admins.length > 0 && (
+          <StyledList
+            dataSource={admins}
+            renderItem={(item: User) => (
+              <StyledListItem>
+                <div>
+                  <StyledAvatar icon={<UserOutlined />} />
+                  {item.displayName}
+                </div>
+                <Button
+                  danger
+                  type="text"
+                  disabled={isLoading}
+                  onClick={() => handleRemoveAdmin(item.username)}
+                >
+                  <DeleteOutlined />
+                </Button>
+              </StyledListItem>
+            )}
+            header="Tournament's Admins"
+          />
+        )}
+      </>
+    )
   );
 }
 

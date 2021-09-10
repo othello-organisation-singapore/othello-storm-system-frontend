@@ -63,39 +63,43 @@ function BasicInfoEditPanel() {
   };
 
   return (
-    <Form>
-      <FormItem label={<FormLabel>Tournament Name</FormLabel>}>
-        <StyledInput
-          placeholder="Name"
-          value={name}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setName(e.target.value)
-          }
-        />
-      </FormItem>
-      <FormItem label={<FormLabel>Country</FormLabel>}>
-        <StyledInput
-          placeholder="Country"
-          value={country}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setCountry(e.target.value)
-          }
-        />
-      </FormItem>
-      <FormItem label={<FormLabel>Type</FormLabel>}>
-        <FormText>{TournamentTypeDisplays[tournament.tournamentType]}</FormText>
-      </FormItem>
-      <FormItem label={<FormLabel>Event Date</FormLabel>}>
-        <StyledRangePicker value={range} onChange={setRange} />
-      </FormItem>
-      <FormItem label={<FormLabel>Creator Name</FormLabel>}>
-        <FormText>{tournament.creator.displayName}</FormText>
-      </FormItem>
-      <StyledButton type="primary" loading={isLoading} onClick={handleSubmit}>
-        Save Changes
-      </StyledButton>
-      <DeleteTournamentButton onSuccess={() => push('/tournaments/all')} />
-    </Form>
+    tournament && (
+      <Form>
+        <FormItem label={<FormLabel>Tournament Name</FormLabel>}>
+          <StyledInput
+            placeholder="Name"
+            value={name}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setName(e.target.value)
+            }
+          />
+        </FormItem>
+        <FormItem label={<FormLabel>Country</FormLabel>}>
+          <StyledInput
+            placeholder="Country"
+            value={country}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setCountry(e.target.value)
+            }
+          />
+        </FormItem>
+        <FormItem label={<FormLabel>Type</FormLabel>}>
+          <FormText>
+            {TournamentTypeDisplays[tournament.tournamentType]}
+          </FormText>
+        </FormItem>
+        <FormItem label={<FormLabel>Event Date</FormLabel>}>
+          <StyledRangePicker value={range} onChange={setRange} />
+        </FormItem>
+        <FormItem label={<FormLabel>Creator Name</FormLabel>}>
+          <FormText>{tournament.creator.displayName}</FormText>
+        </FormItem>
+        <StyledButton type="primary" loading={isLoading} onClick={handleSubmit}>
+          Save Changes
+        </StyledButton>
+        <DeleteTournamentButton onSuccess={() => push('/tournaments/all')} />
+      </Form>
+    )
   );
 }
 

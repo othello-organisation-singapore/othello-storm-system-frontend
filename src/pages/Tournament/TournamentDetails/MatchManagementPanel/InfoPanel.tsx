@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import sortBy from 'lodash/sortBy';
 
-import { Tabs } from 'antd';
+import { Tabs, Empty } from 'antd';
 
 import RoundInfoSubpanel from './RoundInfoSubpanel';
 import { useTournamentRoundContext } from '../TournamentRoundContext';
@@ -16,17 +16,23 @@ const MatchesPanelWrapper = styled.div`
 `;
 
 function MatchesPanel() {
-  const { rounds, refresh: refreshRounds } = useTournamentRoundContext();
+  const { rounds } = useTournamentRoundContext();
   return (
-    <MatchesPanelWrapper>
-      <Tabs defaultActiveKey="0">
-        {sortBy(rounds, 'id').map(round => (
-          <TabPane tab={round.name} key={round.id}>
-            <RoundInfoSubpanel roundId={round.id} />
-          </TabPane>
-        ))}
-      </Tabs>
-    </MatchesPanelWrapper>
+    rounds && (
+      <MatchesPanelWrapper>
+        {rounds.length > 0 ? (
+          <Tabs defaultActiveKey="0">
+            {sortBy(rounds, 'id').map(round => (
+              <TabPane tab={round.name} key={round.id}>
+                <RoundInfoSubpanel roundId={round.id} />
+              </TabPane>
+            ))}
+          </Tabs>
+        ) : (
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+        )}
+      </MatchesPanelWrapper>
+    )
   );
 }
 

@@ -64,36 +64,38 @@ function PlayersEditPanel() {
   };
 
   return (
-    <>
-      <StyledRow>
-        <AddPlayerFromJoueursButton onSuccess={refresh} />
-        <AddNewPlayerButton onSuccess={refresh} />
-      </StyledRow>
-      {players.length > 0 && (
-        <StyledList
-          dataSource={players}
-          renderItem={(item: Player) => (
-            <StyledListItem>
-              <Row>
-                <StyledAvatar icon={<UserOutlined />} />
-                <PlayerName>
-                  {item.lastName} {item.firstName} ({item.country})
-                </PlayerName>
-              </Row>
-              <Button
-                danger
-                type="text"
-                disabled={isLoading}
-                onClick={() => handleRemovePlayer(item.id)}
-              >
-                <DeleteOutlined />
-              </Button>
-            </StyledListItem>
-          )}
-          header="Tournament's Players"
-        />
-      )}
-    </>
+    players && (
+      <>
+        <StyledRow>
+          <AddPlayerFromJoueursButton onSuccess={refresh} />
+          <AddNewPlayerButton onSuccess={refresh} />
+        </StyledRow>
+        {players.length > 0 && (
+          <StyledList
+            dataSource={players}
+            renderItem={(item: Player) => (
+              <StyledListItem>
+                <Row>
+                  <StyledAvatar icon={<UserOutlined />} />
+                  <PlayerName>
+                    {item.lastName} {item.firstName} ({item.country})
+                  </PlayerName>
+                </Row>
+                <Button
+                  danger
+                  type="text"
+                  disabled={isLoading}
+                  onClick={() => handleRemovePlayer(item.id)}
+                >
+                  <DeleteOutlined />
+                </Button>
+              </StyledListItem>
+            )}
+            header="Tournament's Players"
+          />
+        )}
+      </>
+    )
   );
 }
 

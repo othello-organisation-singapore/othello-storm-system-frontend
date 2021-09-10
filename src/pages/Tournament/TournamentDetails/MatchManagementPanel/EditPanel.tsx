@@ -19,21 +19,23 @@ const MatchesPanelWrapper = styled.div`
 function MatchesEditPanel() {
   const { rounds, refresh: refreshRounds } = useTournamentRoundContext();
   return (
-    <MatchesPanelWrapper>
-      <Tabs defaultActiveKey="0">
-        <TabPane tab="Create New Round" key="0">
-          <NewRoundSubpanel />
-        </TabPane>
-        {sortBy(rounds, 'id').map(round => (
-          <TabPane tab={round.name} key={round.id}>
-            <RoundEditSubpanel
-              roundId={round.id}
-              refreshRounds={refreshRounds}
-            />
+    rounds && (
+      <MatchesPanelWrapper>
+        <Tabs defaultActiveKey="0">
+          <TabPane tab="Create New Round" key="0">
+            <NewRoundSubpanel />
           </TabPane>
-        ))}
-      </Tabs>
-    </MatchesPanelWrapper>
+          {sortBy(rounds, 'id').map(round => (
+            <TabPane tab={round.name} key={round.id}>
+              <RoundEditSubpanel
+                roundId={round.id}
+                refreshRounds={refreshRounds}
+              />
+            </TabPane>
+          ))}
+        </Tabs>
+      </MatchesPanelWrapper>
+    )
   );
 }
 

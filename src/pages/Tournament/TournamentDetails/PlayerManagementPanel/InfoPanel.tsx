@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { List, Avatar } from 'antd';
+import { List, Avatar, Empty } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
 import { Row } from 'components/common';
@@ -36,24 +36,28 @@ function PlayersPanel() {
   const { players } = useTournamentPlayerContext();
 
   return (
-    <>
-      {players.length > 0 && (
-        <StyledList
-          dataSource={players}
-          renderItem={(item: Player) => (
-            <StyledListItem>
-              <Row>
-                <StyledAvatar icon={<UserOutlined />} />
-                <PlayerName>
-                  {item.lastName} {item.firstName} ({item.country})
-                </PlayerName>
-              </Row>
-            </StyledListItem>
-          )}
-          header="Tournament's Players"
-        />
-      )}
-    </>
+    players && (
+      <>
+        {players.length > 0 ? (
+          <StyledList
+            dataSource={players}
+            renderItem={(item: Player) => (
+              <StyledListItem>
+                <Row>
+                  <StyledAvatar icon={<UserOutlined />} />
+                  <PlayerName>
+                    {item.lastName} {item.firstName} ({item.country})
+                  </PlayerName>
+                </Row>
+              </StyledListItem>
+            )}
+            header="Tournament's Players"
+          />
+        ) : (
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+        )}
+      </>
+    )
   );
 }
 
