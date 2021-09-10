@@ -1,5 +1,5 @@
 export function setCookie(key: string, value: string) {
-  document.cookie = `${key}=${value}`;
+  document.cookie = `${key}=${value}; path=/;`;
 }
 
 export function removeCookie(key: string) {

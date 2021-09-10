@@ -83,7 +83,7 @@ function AboutOOSPage() {
           Singapore Othello Master Series 2019.
         </CaptionedImage>
         <CaptionedImage src={SingaporeNSpy}>
-          Team Singapore (+spy :p) in World Othello Championship 2019.
+          Team Singapore in World Othello Championship 2019.
         </CaptionedImage>
         <CaptionedImage src={AlexLastTable}>
           Alex Koh playing in last table(?) in World Othello Championship 2019.

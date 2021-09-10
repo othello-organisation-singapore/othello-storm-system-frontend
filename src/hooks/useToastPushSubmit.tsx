@@ -2,29 +2,31 @@ import React, { ReactNode, useCallback } from 'react';
 
 import { message } from 'antd';
 
-import { HttpErrorCode } from 'utils/enums';
+import { HttpErrorCodes } from 'utils/enums';
 
-function useToastPushSubmit(errorMessageOverride: object = {}) {
+function useToastPushSubmit(
+  errorMessageOverride: { [key in HttpErrorCodes]?: ReactNode } = {}
+) {
   const pushMessage = (content: ReactNode) => {
     message.error(content, 1.5);
   };
 
   const pushError = useCallback(
-    (errorCode: HttpErrorCode) => {
+    (errorCode: HttpErrorCodes) => {
       if (errorMessageOverride[errorCode] !== undefined) {
         pushMessage(errorMessageOverride[errorCode]);
         return;
       }
 
       switch (errorCode) {
-        case HttpErrorCode.NoError:
+        case HttpErrorCodes.NoError:
           return;
-        case HttpErrorCode.BadRequestError:
+        case HttpErrorCodes.BadRequestError:
           pushMessage(
             'Bad request parameters, please check your parameters again.'
           );
           return;
-        case HttpErrorCode.AuthenticationFailed:
+        case HttpErrorCodes.AuthenticationFailed:
           pushMessage(
             <>
               Either your account is not available, or you entered wrong
@@ -34,10 +36,10 @@ function useToastPushSubmit(errorMessageOverride: object = {}) {
             </>
           );
           return;
-        case HttpErrorCode.PermissionDenied:
+        case HttpErrorCodes.PermissionDenied:
           pushMessage('You are not allowed to do this action');
           return;
-        case HttpErrorCode.AutomaticPairingError:
+        case HttpErrorCodes.AutomaticPairingError:
           pushMessage(
             <>
               Some unexpected error happens during pairing.
@@ -47,7 +49,7 @@ function useToastPushSubmit(errorMessageOverride: object = {}) {
             </>
           );
           return;
-        case HttpErrorCode.DatabaseError:
+        case HttpErrorCodes.DatabaseError:
           pushMessage(
             <>
               Network error, this app cannot access the database.
@@ -56,10 +58,10 @@ function useToastPushSubmit(errorMessageOverride: object = {}) {
             </>
           );
           return;
-        case HttpErrorCode.TokenExpired:
+        case HttpErrorCodes.TokenExpired:
           pushMessage('Your session has expired, please re-log to continue.');
           return;
-        case HttpErrorCode.ExternalConnectionError:
+        case HttpErrorCodes.ExternalConnectionError:
           pushMessage(
             <>
               Network error, this app cannot access external sources.

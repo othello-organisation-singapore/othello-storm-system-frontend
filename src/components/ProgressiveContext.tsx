@@ -7,9 +7,13 @@ import {
 } from 'react';
 import debounce from 'lodash/debounce';
 
-import { ScreenType } from 'utils/enums';
+import { ScreenTypes } from 'utils/enums';
 
-const ProgressiveContext = createContext(null);
+interface ProgressiveContextShape {
+  screenType: ScreenTypes;
+}
+
+const ProgressiveContext = createContext<ProgressiveContextShape>(null);
 export const useProgressiveContext = () => useContext(ProgressiveContext);
 
 export function ProgressiveContextProvider({
@@ -26,7 +30,7 @@ export function ProgressiveContextProvider({
   return (
     <ProgressiveContext.Provider
       value={{
-        screenType: width <= 650 ? ScreenType.Mobile : ScreenType.Desktop,
+        screenType: width <= 650 ? ScreenTypes.Mobile : ScreenTypes.Desktop,
       }}
     >
       {children}

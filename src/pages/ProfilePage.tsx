@@ -15,7 +15,7 @@ import {
 import { useUserContext } from 'components/UserContext';
 import useFetch from 'hooks/useFetch';
 import useToastPushSubmit from 'hooks/useToastPushSubmit';
-import { MessageResponse } from 'utils/apiResponseShape';
+import { MessageResponse } from 'utils/apiResponseShapes';
 
 const StyledForm = styled(Form)`
   width: 100%;
@@ -136,7 +136,7 @@ function ProfilePage() {
           <Button
             type="primary"
             onClick={() => handleSubmit()}
-            disabled={isLoading}
+            loading={isLoading}
           >
             Save Changes
           </Button>

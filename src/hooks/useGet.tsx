@@ -4,7 +4,7 @@ import toPairs from 'lodash/toPairs';
 import snakecaseKeys from 'snakecase-keys';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 
-import { HttpErrorCode, HttpMethod } from 'utils/enums';
+import { HttpErrorCodes, HttpMethod } from 'utils/enums';
 import useFetch from './useFetch';
 
 type ParamsValue = string | number | boolean;
@@ -22,9 +22,9 @@ function useGet<TResPayload>(
 ) {
   const { request, isLoading } = useFetch<TResPayload>();
   const [refreshKey, setRefreshKey] = useState(0);
-  const [data, setData] = useState({});
+  const [data, setData] = useState<TResPayload>(null);
   const [error, setError] = useState({
-    code: HttpErrorCode.NoError,
+    code: HttpErrorCodes.NoError,
     message: '',
   });
 
@@ -34,7 +34,7 @@ function useGet<TResPayload>(
 
     request(`${path}${query}`, 'GET').then(({ response, error }) => {
       setError(error);
-      if (!controller.signal.aborted && error.code === 0) {
+      if (!controller.signal.aborted && error.code === 0 && response !== '') {
         setData(response);
       }
       return () => controller.abort();
@@ -50,3 +50,5 @@ function useGet<TResPayload>(
     ]),
   };
 }
+
+export default useGet;

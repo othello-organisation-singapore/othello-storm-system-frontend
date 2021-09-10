@@ -1,11 +1,16 @@
-import { HttpErrorCode } from 'utils/enums';
+import { HttpErrorCodes } from 'utils/enums';
 
 export interface HttpResponseError {
-  code: HttpErrorCode;
+  code: HttpErrorCodes;
   message: string;
 }
 
 export interface HttpResponse<TResPayload> {
   success: '' | TResPayload;
   error: HttpResponseError;
+}
+
+export interface ClosableComponentProps {
+  isOpen: boolean;
+  handleClose: () => void;
 }

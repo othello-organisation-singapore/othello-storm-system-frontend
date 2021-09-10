@@ -3,16 +3,16 @@ import styled from 'styled-components';
 
 import { Input, Button, Form } from 'antd';
 
-import { GroupTitle, FormLabel, FormItem } from 'components/common';
+import {
+  GroupTitle,
+  FormLabel,
+  FormItem,
+  StyledInput,
+} from 'components/common';
 import useToastPushSubmit from 'hooks/useToastPushSubmit';
 import useFetch from 'hooks/useFetch';
-import { MessageResponse } from 'utils/apiResponseShape';
-import { HttpErrorCode } from 'utils/enums';
-
-const StyledInput = styled(Input)`
-  margin: 10px 0;
-  width: 300px;
-`;
+import { MessageResponse } from 'utils/apiResponseShapes';
+import { HttpErrorCodes } from 'utils/enums';
 
 const StyledPasswordInput = styled(Input.Password)`
   margin: 10px 0 20px;
@@ -26,7 +26,7 @@ function CreateAdminPanel() {
   const [formError, setFormError] = useState(false);
 
   const { pushError, pushSuccess } = useToastPushSubmit({
-    [HttpErrorCode.BadRequestError]: 'Username exists',
+    [HttpErrorCodes.BadRequestError]: 'Username exists',
   });
   const { request, isLoading } = useFetch<MessageResponse>();
   const handleSubmit = async () => {
@@ -92,8 +92,8 @@ function CreateAdminPanel() {
           />
         </FormItem>
 
-        <Button type="primary" disabled={isLoading} onClick={handleSubmit}>
-          Create New User
+        <Button type="primary" loading={isLoading} onClick={handleSubmit}>
+          Submit
         </Button>
       </Form>
     </div>
