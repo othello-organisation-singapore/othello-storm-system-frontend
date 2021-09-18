@@ -4,7 +4,8 @@ import toPairs from 'lodash/toPairs';
 import snakecaseKeys from 'snakecase-keys';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 
-import { HttpErrorCodes, HttpMethod } from 'utils/enums';
+import { HttpErrorCodes } from 'utils/enums';
+import { RequestOptions } from 'utils/interfaces';
 import useFetch from './useFetch';
 
 type ParamsValue = string | number | boolean;
@@ -18,7 +19,8 @@ export const joinParams = (params: { [key: string]: ParamsValue }) =>
 
 function useGet<TResPayload>(
   path: string,
-  params: { [key: string]: ParamsValue } = {}
+  params: { [key: string]: ParamsValue } = {},
+  options: RequestOptions = { skip: false }
 ) {
   const { request, isLoading } = useFetch<TResPayload>();
   const [refreshKey, setRefreshKey] = useState(0);
@@ -29,6 +31,10 @@ function useGet<TResPayload>(
   });
 
   useDeepCompareEffect(() => {
+    if (options.skip) {
+      return;
+    }
+
     const controller = new AbortController();
     const query = keys(params).length > 0 ? `?${joinParams(params)}` : '';
 
@@ -39,7 +45,7 @@ function useGet<TResPayload>(
       }
       return () => controller.abort();
     });
-  }, [params, path, refreshKey]);
+  }, [params, path, refreshKey, options]);
 
   return {
     data,
