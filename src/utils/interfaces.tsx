@@ -14,3 +14,7 @@ export interface ClosableComponentProps {
   isOpen: boolean;
   handleClose: () => void;
 }
+
+export interface RequestOptions {
+  skip: boolean;
+}

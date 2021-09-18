@@ -31,11 +31,13 @@ export const useTournamentPlayerContext = () =>
 interface TournamentPlayerProviderProps {
   tournament: TournamentDetails;
   children: ReactNode;
+  skipJoueursLoad: boolean;
 }
 
 function TournamentPlayerProvider({
   tournament,
   children,
+  skipJoueursLoad,
 }: TournamentPlayerProviderProps) {
   const {
     data: playerListData,
@@ -46,26 +48,28 @@ function TournamentPlayerProvider({
 
   const {
     data: joueursPlayerListData,
-    refresh: refreshJoueursPlayers,
   } = useGet<TournamentJoueursPlayerListResponse>(
-    `/api/tournaments/${tournament.id}/joueurs_players/`
+    `/api/tournaments/${tournament.id}/joueurs_players/`,
+    {},
+    { skip: skipJoueursLoad }
   );
+
+  const joueursData: TournamentJoueursPlayerListResponse = skipJoueursLoad
+    ? { joueursPlayers: [], tournamentId: tournament.id }
+    : joueursPlayerListData;
 
   return (
     playerListData &&
-    joueursPlayerListData && (
+    joueursData && (
       <TournamentPlayerContext.Provider
         value={{
           players: playerListData.players,
           joueursPlayers: differenceBy(
-            joueursPlayerListData.joueursPlayers,
+            joueursData.joueursPlayers,
             playerListData.players,
             player => player.joueursId
           ),
-          refresh: () => {
-            refreshPlayers();
-            refreshJoueursPlayers();
-          },
+          refresh: refreshPlayers,
           playersById: keyBy(playerListData.players, player => player.id),
         }}
       >

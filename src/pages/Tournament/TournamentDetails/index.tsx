@@ -68,7 +68,10 @@ function TournamentManagementTabs({
     admins.filter(admin => admin.username === user.username).length > 0;
 
   return (
-    <TournamentPlayerProvider tournament={tournament}>
+    <TournamentPlayerProvider
+      tournament={tournament}
+      skipJoueursLoad={!hasAdminPermission}
+    >
       <Tabs defaultActiveKey="1" onChange={refresh} type="card">
         <TabPane tab="Basic Info" key="1">
           {hasMainEditPermission ? (
