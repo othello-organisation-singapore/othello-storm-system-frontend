@@ -20,6 +20,7 @@ export interface TournamentPreview {
   tournamentType: TournamentTypes;
   country: string;
   creatorUsername: string;
+  creatorDisplayName: string;
   startDate: string;
   endDate: string;
 }

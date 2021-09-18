@@ -72,8 +72,8 @@ const desktopTableColumns = [
   },
   {
     title: 'Creator',
-    dataIndex: 'creatorUsername',
-    key: 'creatorUsername',
+    dataIndex: 'creatorDisplayName',
+    key: 'creatorDisplayName',
   },
   {
     title: 'Start Date',
