@@ -11,7 +11,7 @@ import { FormItem, FormLabel, Row, StyledInput } from 'components/common';
 import useEventCallback from 'hooks/useEventCallback';
 import useFetch from 'hooks/useFetch';
 import useToastPushSubmit from 'hooks/useToastPushSubmit';
-import { HttpErrorCodes, RoundTypes } from 'utils/enums';
+import { HttpErrorCodes, RoundTypes, TournamentTypes } from 'utils/enums';
 import { HttpResponseError } from 'utils/interfaces';
 import { MessageResponse, Player } from 'utils/apiResponseShapes';
 import { PlayerButton } from './parts';
@@ -157,11 +157,13 @@ function NewRoundSubpanel() {
               Automatic
             </Tooltip>
           </Radio>
-          <Radio value={RoundTypes.ManualNormal}>
-            <Tooltip title="Manual pairing for common rounds, results will be included for the next automatic pairing">
-              Manual
-            </Tooltip>
-          </Radio>
+          {tournament.tournamentType === TournamentTypes.SwissPairing && (
+            <Radio value={RoundTypes.ManualNormal}>
+              <Tooltip title="Manual pairing for common rounds, results will be included for the next automatic pairing">
+                Manual
+              </Tooltip>
+            </Radio>
+          )}
           <Radio value={RoundTypes.ManualSpecial}>
             <Tooltip title="Manual pairing for special rounds (e.g. Final), results will not be included for the next automatic pairing or for standings">
               Special
