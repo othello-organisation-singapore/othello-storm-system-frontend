@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Button, Form, InputNumber, Modal } from 'antd';
 
@@ -34,15 +34,16 @@ function UpdateScoreDialog({
   const { tournament } = useTournamentInfoContext();
   const { request, isLoading } = useFetch<MessageResponse>();
   const { pushError, pushSuccess } = useToastPushSubmit();
-  const [blackScore, setBlackScore] = useState(
+
+  const initialScore =
     match.blackScore === SpecialConditionScores.NotFinished
       ? 32
-      : match.blackScore
-  );
+      : match.blackScore;
+  const [blackScore, setBlackScore] = useState(initialScore);
 
   const onClose = useEventCallback(() => {
     handleClose();
-    setBlackScore(32);
+    setBlackScore(initialScore);
   });
 
   const handleSubmit = useEventCallback(async () => {
@@ -60,7 +61,7 @@ function UpdateScoreDialog({
     } else {
       pushSuccess('Match Updated');
       onSuccess();
-      onClose();
+      handleClose();
     }
   });
 
