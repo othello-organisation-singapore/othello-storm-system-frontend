@@ -24,13 +24,9 @@ function CreatedTournamentsPage() {
       {data &&
         !isLoading &&
         (screenType === ScreenTypes.Desktop ? (
-          <DesktopTournamentListTable
-            tournaments={data.tournaments.slice().reverse()}
-          />
+          <DesktopTournamentListTable tournaments={data.tournaments} />
         ) : (
-          <MobileTournamentListTable
-            tournaments={data.tournaments.slice().reverse()}
-          />
+          <MobileTournamentListTable tournaments={data.tournaments} />
         ))}
     </>
   );

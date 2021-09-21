@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import sortedUniqBy from 'lodash/sortedUniqBy';
+import sortBy from 'lodash/sortBy';
 
 import { Table, Button } from 'antd';
 
@@ -94,7 +94,7 @@ export function DesktopTournamentListTable({
   const { url } = useRouteMatch();
   return (
     <Table
-      dataSource={sortedUniqBy(tournaments, t => -t.id).map(t => ({
+      dataSource={sortBy(tournaments, t => -t.id).map(t => ({
         ...t,
         key: t.id,
         tournamentType: TournamentTypeDisplays[t.tournamentType],
@@ -132,7 +132,11 @@ export function MobileTournamentListTable({
   const { url } = useRouteMatch();
   return (
     <Table
-      dataSource={tournaments.map(t => ({ ...t, key: t.id }))}
+      dataSource={sortBy(tournaments, t => -t.id).map(t => ({
+        ...t,
+        key: t.id,
+        tournamentType: TournamentTypeDisplays[t.tournamentType],
+      }))}
       columns={mobileTableColumns}
       scroll={{ x: true }}
       onRow={record => ({
