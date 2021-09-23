@@ -46,7 +46,7 @@ function AboutOthelloPage() {
           Starting condition of an Othello board before a match.
         </CaptionedImage>
         <CaptionedImage src={OthelloMatch}>
-          An official tournament of Othello.
+          An official tournament of Othello. (Photo by Chin)
         </CaptionedImage>
       </CaptionedImageGroup>
     </PageWrapper>

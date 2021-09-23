@@ -54,19 +54,19 @@ function AboutWOFPage() {
       </InfoBlock>
       <CaptionedImageGroup>
         <CaptionedImage src={WOC2019TournamentRoom}>
-          One of WOC 2019 Tournament match.
+          One of WOC 2019 Tournament match. (Photo by Chin)
         </CaptionedImage>
         <CaptionedImage src={WOC2019Final}>
-          WOC 2019 final match.
+          WOC 2019 final match. (Photo by Chin)
         </CaptionedImage>
         <CaptionedImage src={WOC2019Winners}>
-          Winners of WOC 2019.
+          Winners of WOC 2019. (Photo by Chin)
         </CaptionedImage>
         <CaptionedImage src={WOC2019FemaleChamp}>
-          Joanna William, WOC 2019 Female Champion
+          Joanna William, WOC 2019 Female Champion (Photo by Chin)
         </CaptionedImage>
         <CaptionedImage src={WOC2019Champ}>
-          Akihiro Takahashi (center), WOC 2019 Champion
+          Akihiro Takahashi (center), WOC 2019 Champion (Photo by Chin)
         </CaptionedImage>
       </CaptionedImageGroup>
     </PageWrapper>
