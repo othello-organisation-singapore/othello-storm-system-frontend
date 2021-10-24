@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Form } from 'antd';
+import { Button, Form } from 'antd';
 
 import useGet from 'hooks/useGet';
 import useFetch from 'hooks/useFetch';
 import useEventCallback from 'hooks/useEventCallback';
 import useToastPushSubmit from 'hooks/useToastPushSubmit';
-import { FormItem, FormLabel, FormText, Row } from 'components/common';
+import {
+  FormItem,
+  FormLabel,
+  FormText,
+  Row,
+  ThrottledButton,
+} from 'components/common';
 import {
   MessageResponse,
   RoundDetailsResponse,
@@ -83,10 +89,26 @@ function RoundEditSubpanel({ roundId, refreshRounds }: RoundEditSubpanelProps) {
     standingsData && (
       <StyledRow>
         <Column>
-          <DeleteRoundButton
-            onSuccess={refreshRounds}
-            round={roundData.round}
-          />
+          <Row>
+            <DeleteRoundButton
+              onSuccess={refreshRounds}
+              round={roundData.round}
+            />
+            <ThrottledButton
+              props={{
+                type: 'primary',
+                style: { marginBottom: 12, marginLeft: 8 },
+              }}
+              onClick={() => {
+                refreshRoundData();
+                refreshMatchesData();
+                refreshStandingsData();
+              }}
+              interval={500}
+            >
+              Refresh
+            </ThrottledButton>
+          </Row>
           <Form>
             <FormItem label={<FormLabel>Round Name</FormLabel>}>
               <FormText editable={{ onChange: handleNameChange }}>
