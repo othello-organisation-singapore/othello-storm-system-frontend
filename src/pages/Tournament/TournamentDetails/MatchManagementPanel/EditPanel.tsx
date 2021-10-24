@@ -6,6 +6,7 @@ import { Tabs } from 'antd';
 
 import NewRoundSubpanel from './NewRoundSubpanel';
 import RoundEditSubpanel from './RoundEditSubpanel';
+import SummaryPanel from './SummaryPanel';
 import { useTournamentRoundContext } from '../TournamentRoundContext';
 
 const { TabPane } = Tabs;
@@ -22,11 +23,14 @@ function MatchesEditPanel() {
     rounds && (
       <MatchesPanelWrapper>
         <Tabs defaultActiveKey="0">
-          <TabPane tab="Create New Round" key="0">
+          <TabPane tab="Summary" key="0">
+            <SummaryPanel />
+          </TabPane>
+          <TabPane tab="Create New Round" key="1">
             <NewRoundSubpanel />
           </TabPane>
           {sortBy(rounds, 'id').map(round => (
-            <TabPane tab={round.name} key={round.id}>
+            <TabPane tab={round.name} key={round.id + 1}>
               <RoundEditSubpanel
                 roundId={round.id}
                 refreshRounds={refreshRounds}

@@ -117,3 +117,43 @@ export interface StandingsResponse {
   tournamentId: number;
   standings: PlayerStanding[];
 }
+
+export interface SummaryResponse {
+  tournamentInfo: TournamentInfoSummary;
+  standings: PlayerStandingSummary[];
+  rounds: RoundSummary[];
+}
+
+export interface TournamentInfoSummary {
+  id: number;
+  name: string;
+  country: string;
+  startDate: string;
+  endDate: string;
+}
+
+export interface PlayerStandingSummary {
+  playerId: number;
+  joueursId: string;
+  firstName: string;
+  lastName: string;
+  country: string;
+  majorScore: number;
+  minorScore: number;
+}
+
+export interface RoundSummary {
+  id: number;
+  name: string;
+  matches: MatchSummary[];
+}
+
+export interface MatchSummary {
+  id: number;
+  blackPlayerId: number;
+  blackPlayerJoueursId: string;
+  blackScore: number;
+  whitePlayerId: number;
+  whitePlayerJoueursId: string;
+  whiteScore: number;
+}

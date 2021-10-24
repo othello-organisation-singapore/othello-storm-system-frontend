@@ -59,13 +59,7 @@ function AboutOthelloStormPage() {
             the latest standing.
           </li>
           <li>Players can see standing online without logging in.</li>
-        </ul>
-        Planned features:
-        <ul>
-          <li>
-            Able to send elo file (used for rating calculation by WOF) from
-            tournament result in form of email.
-          </li>
+          <li>Admin can download ELO file to send to WOF.</li>
         </ul>
       </InfoBlock>
       <InfoBlock title="How do I start using Othello Storm System?">
